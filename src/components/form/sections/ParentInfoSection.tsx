@@ -18,14 +18,11 @@ export function ParentInfoSection({ register, errors, watch, title, titleCn, pre
   const watchData = watch();
   const fatherStatus = watchData[prefix]?.fatherStatus;
   const motherStatus = watchData[prefix]?.motherStatus;
-  
-  const isSpouseParents = prefix === 'parentsSpouse';
-  const showNotApplicable = isSpouseParents;
 
   const statusOptions = [
     { value: 'living', label: 'Living', labelCn: '在世' },
     { value: 'deceased', label: 'Deceased', labelCn: '已故' },
-    ...(showNotApplicable ? [{ value: 'notApplicable', label: 'Not Applicable', labelCn: '不适用' }] : []),
+    { value: 'notApplicable', label: 'Not Applicable', labelCn: '不适用' },
   ];
 
   return (

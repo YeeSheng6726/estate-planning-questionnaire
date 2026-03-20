@@ -32,25 +32,29 @@ export interface Beneficiary {
   id: string;
   fullName: string;
   relationship: string;
+  relationshipOther: string;
   nric: string;
   mobileNo: string;
   address: string;
 }
 
 export interface FinancialDependent {
-  hasDependents: boolean;
+  hasDependents: boolean | string;
   description: string;
 }
 
 export interface BeneficiaryProtection {
-  hasExclusions: boolean;
+  hasExclusions: boolean | string;
   description: string;
 }
 
 export interface RealEstate {
   id: string;
+  isNotApplicable: boolean;
   propertyType: string;
+  propertyTypeOther: string;
   ownership: 'sole' | 'joint';
+  ownershipOther: string;
   address: string;
   mainBeneficiaries: string;
   substituteBeneficiaries: string;

@@ -2,7 +2,7 @@
 
 import { UseFormRegister, FieldErrors, UseFormSetValue, UseFormWatch } from 'react-hook-form';
 import { Textarea } from '@/components/ui/Textarea';
-import { Checkbox } from '@/components/ui/Checkbox';
+import { RadioGroup } from '@/components/ui/RadioGroup';
 import { FormData } from '@/lib/types';
 
 interface Props {
@@ -14,6 +14,7 @@ interface Props {
 
 export function BeneficiaryProtectionSection({ register, errors, setValue, watch }: Props) {
   const data = watch().beneficiaryProtection;
+  const hasExclusions = data?.hasExclusions;
 
   return (
     <div className="space-y-6">
@@ -28,14 +29,21 @@ export function BeneficiaryProtectionSection({ register, errors, setValue, watch
         </p>
       </div>
 
-      <Checkbox
-        label="Yes, I have exclusions or beneficiaries requiring special protection"
-        labelCn="有需要排除或特别保护的受益人"
-        checked={data.hasExclusions}
-        onChange={(checked) => setValue('beneficiaryProtection.hasExclusions', checked)}
+      <RadioGroup
+        label="Do you have any exclusions or special protection needs?"
+        labelCn="您是否有任何排除或特别保护需求？"
+        options={[
+          { value: 'false', label: 'No', labelCn: '否' },
+          { value: 'true', label: 'Yes', labelCn: '是' },
+          { value: 'notApplicable', label: 'Not Applicable', labelCn: '不适用' },
+        ]}
+        horizontal
+        {...register('beneficiaryProtection.hasExclusions', {
+          setValueAs: (v) => v === 'true' ? true : v === 'false' ? false : v,
+        })}
       />
 
-      {data.hasExclusions && (
+      {hasExclusions === true && (
         <div className="mt-4 p-4 bg-gray-50 rounded-lg">
           <Textarea
             label="Please provide brief details"

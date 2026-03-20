@@ -22,6 +22,7 @@ export function BeneficiarySection({ register, errors, setValue, watch }: Props)
       id: Date.now().toString(),
       fullName: '',
       relationship: '',
+      relationshipOther: '',
       nric: '',
       mobileNo: '',
       address: '',
@@ -53,9 +54,20 @@ export function BeneficiarySection({ register, errors, setValue, watch }: Props)
           <span className="text-[#c9a962] ml-2">子女及受益人</span>
         </p>
         <p className="text-xs text-gray-500 mt-1">
-          Add your children and other beneficiaries. Maximum 6.
-          <span className="text-[#c9a962] ml-1">请添加您的子女及其他受益人，最多6位。</span>
+          Add your children and other beneficiaries. Maximum 10.
+          <span className="text-[#c9a962] ml-1">请添加您的子女及其他受益人，最多10位。</span>
         </p>
+      </div>
+
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <Input
+          label="No. of Children"
+          labelCn="孩子数目"
+          type="number"
+          min="0"
+          placeholder="0"
+          {...register('beneficiaries', { valueAsNumber: true })}
+        />
       </div>
 
       <div className="space-y-4">
@@ -90,17 +102,25 @@ export function BeneficiarySection({ register, errors, setValue, watch }: Props)
                   label="Full Name"
                   labelCn="姓名"
                   placeholder="As per NRIC"
-                  error={errors.beneficiaries?.[index]?.fullName?.message}
                   {...register(`beneficiaries.${index}.fullName`)}
                 />
 
-                <Select
-                  label="Relationship"
-                  labelCn="关系"
-                  options={relationshipOptions}
-                  error={errors.beneficiaries?.[index]?.relationship?.message}
-                  {...register(`beneficiaries.${index}.relationship`)}
-                />
+                <div className="space-y-2">
+                  <Select
+                    label="Relationship"
+                    labelCn="关系"
+                    options={relationshipOptions}
+                    {...register(`beneficiaries.${index}.relationship`)}
+                  />
+                  {beneficiary.relationship === 'Other' && (
+                    <Input
+                      label="Please specify"
+                      labelCn="请注明"
+                      placeholder="Enter relationship"
+                      {...register(`beneficiaries.${index}.relationshipOther`)}
+                    />
+                  )}
+                </div>
               </div>
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -129,7 +149,7 @@ export function BeneficiarySection({ register, errors, setValue, watch }: Props)
         ))}
       </div>
 
-      {beneficiaries.length < 6 && (
+      {beneficiaries.length < 10 && (
         <Button
           type="button"
           variant="secondary"

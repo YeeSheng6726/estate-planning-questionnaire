@@ -46,8 +46,9 @@ export const parentInfoSchema = z.object({
 
 export const beneficiarySchema = z.object({
   id: z.string(),
-  fullName: z.string().min(1),
-  relationship: z.string().min(1),
+  fullName: z.string().optional(),
+  relationship: z.string().optional(),
+  relationshipOther: z.string().optional(),
   nric: z.string().optional(),
   mobileNo: z.string().optional(),
   address: z.string().optional(),
@@ -65,10 +66,13 @@ export const beneficiaryProtectionSchema = z.object({
 
 export const realEstateSchema = z.object({
   id: z.string(),
-  propertyType: z.string().min(1),
-  ownership: z.enum(['sole', 'joint']),
-  address: z.string().min(1),
-  mainBeneficiaries: z.string().min(1),
+  isNotApplicable: z.boolean(),
+  propertyType: z.string().optional(),
+  propertyTypeOther: z.string().optional(),
+  ownership: z.enum(['sole', 'joint']).optional(),
+  ownershipOther: z.string().optional(),
+  address: z.string().optional(),
+  mainBeneficiaries: z.string().optional(),
   substituteBeneficiaries: z.string().optional(),
   hasMortgageInsurance: z.boolean(),
 });

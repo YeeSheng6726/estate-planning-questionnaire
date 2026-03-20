@@ -2,7 +2,7 @@
 
 import { UseFormRegister, FieldErrors, UseFormSetValue, UseFormWatch } from 'react-hook-form';
 import { Textarea } from '@/components/ui/Textarea';
-import { Checkbox } from '@/components/ui/Checkbox';
+import { RadioGroup } from '@/components/ui/RadioGroup';
 import { FormData } from '@/lib/types';
 
 interface Props {
@@ -14,6 +14,7 @@ interface Props {
 
 export function FinancialDependentSection({ register, errors, setValue, watch }: Props) {
   const data = watch().financialDependent;
+  const hasDependents = data?.hasDependents;
 
   return (
     <div className="space-y-6">
@@ -28,14 +29,21 @@ export function FinancialDependentSection({ register, errors, setValue, watch }:
         </p>
       </div>
 
-      <Checkbox
-        label="Yes, I have financial dependents"
-        labelCn="有其他经济依赖者"
-        checked={data.hasDependents}
-        onChange={(checked) => setValue('financialDependent.hasDependents', checked)}
+      <RadioGroup
+        label="Do you have financial dependents?"
+        labelCn="您是否有经济依赖者？"
+        options={[
+          { value: 'false', label: 'No', labelCn: '否' },
+          { value: 'true', label: 'Yes', labelCn: '是' },
+          { value: 'notApplicable', label: 'Not Applicable', labelCn: '不适用' },
+        ]}
+        horizontal
+        {...register('financialDependent.hasDependents', {
+          setValueAs: (v) => v === 'true' ? true : v === 'false' ? false : v,
+        })}
       />
 
-      {data.hasDependents && (
+      {hasDependents === true && (
         <div className="mt-4 p-4 bg-gray-50 rounded-lg">
           <Textarea
             label="Please describe the nature of support"
