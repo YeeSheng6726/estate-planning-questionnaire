@@ -3,7 +3,6 @@
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { useForm } from 'react-hook-form';
-import { zodResolver } from '@hookform/resolvers/zod';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ArrowLeft, ArrowRight, Send, Save, CheckCircle } from 'lucide-react';
 
@@ -158,7 +157,6 @@ export function MultiStepForm() {
     reset,
     formState: { errors },
   } = useForm<FormData>({
-    resolver: zodResolver(formDataSchema) as any,
     defaultValues,
     mode: 'onBlur',
   });
@@ -343,9 +341,7 @@ export function MultiStepForm() {
                   </div>
 
                   <form onSubmit={handleSubmit(onSubmit)}>
-                    <ErrorBoundary>
-                      {renderSection()}
-                    </ErrorBoundary>
+                    {renderSection()}
 
                     <div className="flex justify-between items-center mt-8 pt-6 border-t border-gray-200">
                       <div className="flex items-center gap-2">
