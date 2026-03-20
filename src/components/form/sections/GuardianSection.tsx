@@ -84,11 +84,14 @@ export function GuardianSection({ register, watch, title, titleCn, subtitle, pre
               placeholder="Complete residential address"
               {...register(`${prefix}.address`)}
             />
+          </div>
 
+          <div className="border-t border-gray-200 pt-6 mt-6">
+            <h4 className="font-medium text-[#1e3a5f] mb-4">Remarks / 备注</h4>
             <Textarea
-              label="Remarks"
-              labelCn="备注"
-              placeholder="Additional details not mentioned above"
+              label="Additional details not mentioned above"
+              labelCn="上述未提及的其他详情"
+              placeholder="Enter any additional details"
               rows={3}
               {...register(`${prefix}.remarks`)}
             />
