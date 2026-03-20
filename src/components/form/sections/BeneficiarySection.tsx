@@ -60,18 +60,19 @@ export function BeneficiarySection({ register, errors, setValue, watch }: Props)
         </p>
       </div>
 
-       <div className="space-y-4">
-         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-           <Input
-             label="No. of Children"
-             labelCn="孩子数目"
-             type="number"
-             min="0"
-             placeholder="0"
-             {...register('beneficiaries', { valueAsNumber: true })}
-           />
-         </div>
-       </div>
+        <div className="space-y-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <Input
+              label="No. of Children"
+              labelCn="孩子数目"
+              type="number"
+              min="0"
+              max="10"
+              placeholder="0"
+              {...register('numberOfChildren', { valueAsNumber: true })}
+            />
+          </div>
+        </div>
        
        <div className="space-y-4">
          {beneficiaries.length === 0 && (

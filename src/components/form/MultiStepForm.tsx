@@ -76,13 +76,14 @@ const defaultValues: FormData = {
     motherStatus: 'living',
     motherName: '',
   },
+  numberOfChildren: 0,
   beneficiaries: [],
   financialDependent: {
-    hasDependents: false,
+    hasDependents: 'false',
     description: '',
   },
   beneficiaryProtection: {
-    hasExclusions: false,
+    hasExclusions: 'false',
     description: '',
   },
   realEstate: [],
@@ -95,8 +96,12 @@ const defaultValues: FormData = {
     sspn: '',
     prs: '',
     insuranceNominationCompleted: '',
+    insuranceBeneficiary: '',
+    insuranceSubBeneficiary: '',
     insuranceRemarks: '',
     epfNominationCompleted: '',
+    epfBeneficiary: '',
+    epfSubBeneficiary: '',
     epfRemarks: '',
   },
   businessAssets: {
@@ -240,7 +245,7 @@ export function MultiStepForm() {
       case 9:
         return <VehicleSection register={register} errors={errors} watch={watch} setValue={setValue} />;
       case 10:
-        return <InvestmentsSection register={register} errors={errors} />;
+        return <InvestmentsSection register={register} errors={errors} watch={watch} setValue={setValue} />;
       case 11:
         return <BusinessAssetsSection register={register} errors={errors} watch={watch} setValue={setValue} />;
       case 12:

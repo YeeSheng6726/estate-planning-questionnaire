@@ -39,12 +39,12 @@ export interface Beneficiary {
 }
 
 export interface FinancialDependent {
-  hasDependents: boolean | string;
+  hasDependents: 'true' | 'false' | 'notApplicable' | boolean;
   description: string;
 }
 
 export interface BeneficiaryProtection {
-  hasExclusions: boolean | string;
+  hasExclusions: 'true' | 'false' | 'notApplicable' | boolean;
   description: string;
 }
 
@@ -84,8 +84,12 @@ export interface Investments {
   sspn: string;
   prs: string;
   insuranceNominationCompleted: string;
+  insuranceBeneficiary: string;
+  insuranceSubBeneficiary: string;
   insuranceRemarks: string;
   epfNominationCompleted: string;
+  epfBeneficiary: string;
+  epfSubBeneficiary: string;
   epfRemarks: string;
 }
 
@@ -124,6 +128,7 @@ export interface FormData {
   spouseInfo: SpouseInfo;
   parentsTestator: ParentInfo;
   parentsSpouse: ParentInfo;
+  numberOfChildren: number;
   beneficiaries: Beneficiary[];
   financialDependent: FinancialDependent;
   beneficiaryProtection: BeneficiaryProtection;

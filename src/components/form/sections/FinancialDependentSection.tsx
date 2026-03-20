@@ -37,12 +37,10 @@ export function FinancialDependentSection({ register, errors, setValue, watch }:
           { value: 'notApplicable', label: 'Not Applicable', labelCn: '不适用' },
         ]}
         horizontal
-        {...register('financialDependent.hasDependents', {
-          setValueAs: (v) => v === 'true' ? true : v === 'false' ? false : v,
-        })}
+        {...register('financialDependent.hasDependents')}
       />
 
-      {hasDependents === true && (
+      {hasDependents === 'true' && (
         <div className="mt-4 p-4 bg-gray-50 rounded-lg">
           <Textarea
             label="Please describe the nature of support"

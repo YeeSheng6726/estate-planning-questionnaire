@@ -37,12 +37,10 @@ export function BeneficiaryProtectionSection({ register, errors, setValue, watch
           { value: 'notApplicable', label: 'Not Applicable', labelCn: '不适用' },
         ]}
         horizontal
-        {...register('beneficiaryProtection.hasExclusions', {
-          setValueAs: (v) => v === 'true' ? true : v === 'false' ? false : v,
-        })}
+        {...register('beneficiaryProtection.hasExclusions')}
       />
 
-      {hasExclusions === true && (
+      {hasExclusions === 'true' && (
         <div className="mt-4 p-4 bg-gray-50 rounded-lg">
           <Textarea
             label="Please provide brief details"

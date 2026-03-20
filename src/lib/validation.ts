@@ -55,12 +55,12 @@ export const beneficiarySchema = z.object({
 });
 
 export const financialDependentSchema = z.object({
-  hasDependents: z.boolean(),
+  hasDependents: z.union([z.boolean(), z.literal('true'), z.literal('false'), z.literal('notApplicable')]).optional(),
   description: z.string().optional(),
 });
 
 export const beneficiaryProtectionSchema = z.object({
-  hasExclusions: z.boolean(),
+  hasExclusions: z.union([z.boolean(), z.literal('true'), z.literal('false'), z.literal('notApplicable')]).optional(),
   description: z.string().optional(),
 });
 
@@ -100,8 +100,12 @@ export const investmentsSchema = z.object({
   sspn: z.string().optional(),
   prs: z.string().optional(),
   insuranceNominationCompleted: z.string().min(1),
+  insuranceBeneficiary: z.string().optional(),
+  insuranceSubBeneficiary: z.string().optional(),
   insuranceRemarks: z.string().optional(),
   epfNominationCompleted: z.string().min(1),
+  epfBeneficiary: z.string().optional(),
+  epfSubBeneficiary: z.string().optional(),
   epfRemarks: z.string().optional(),
 });
 
@@ -140,6 +144,7 @@ export const formDataSchema = z.object({
   spouseInfo: spouseInfoSchema,
   parentsTestator: parentInfoSchema,
   parentsSpouse: parentInfoSchema,
+  numberOfChildren: z.number().optional(),
   beneficiaries: z.array(beneficiarySchema),
   financialDependent: financialDependentSchema,
   beneficiaryProtection: beneficiaryProtectionSchema,

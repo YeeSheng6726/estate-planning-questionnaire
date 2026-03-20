@@ -1,17 +1,25 @@
 'use client';
 
-import { UseFormRegister, FieldErrors } from 'react-hook-form';
+import { UseFormRegister, FieldErrors, UseFormSetValue, UseFormWatch } from 'react-hook-form';
 import { Input } from '@/components/ui/Input';
 import { Select } from '@/components/ui/Select';
 import { Textarea } from '@/components/ui/Textarea';
+import { RadioGroup } from '@/components/ui/RadioGroup';
 import { FormData } from '@/lib/types';
 
 interface Props {
   register: UseFormRegister<FormData>;
   errors: FieldErrors<FormData>;
+  setValue: UseFormSetValue<FormData>;
+  watch: UseFormWatch<FormData>;
 }
 
-export function InvestmentsSection({ register, errors }: Props) {
+export function InvestmentsSection({ register, errors, setValue, watch }: Props) {
+  const investments = watch().investments;
+
+  const insuranceCompleted = investments?.insuranceNominationCompleted;
+  const epfCompleted = investments?.epfNominationCompleted;
+
   return (
     <div className="space-y-6">
       <div className="bg-gradient-to-r from-[#1e3a5f]/5 to-[#c9a962]/5 p-4 rounded-lg mb-6">
@@ -79,6 +87,23 @@ export function InvestmentsSection({ register, errors }: Props) {
           {...register('investments.insuranceNominationCompleted')}
         />
 
+        {insuranceCompleted && insuranceCompleted !== 'Not Applicable' && (
+          <div className="space-y-4 p-4 bg-gray-50 rounded-lg">
+            <Input
+              label="Beneficiary"
+              labelCn="指定受益人"
+              placeholder="Name of beneficiary"
+              {...register('investments.insuranceBeneficiary')}
+            />
+            <Input
+              label="Substitute Beneficiary"
+              labelCn="替代受益人"
+              placeholder="Name of substitute beneficiary"
+              {...register('investments.insuranceSubBeneficiary')}
+            />
+          </div>
+        )}
+
         <Textarea
           label="Remarks - Insurance Policies"
           labelCn="备注：保单"
@@ -103,6 +128,23 @@ export function InvestmentsSection({ register, errors }: Props) {
           error={errors.investments?.epfNominationCompleted?.message}
           {...register('investments.epfNominationCompleted')}
         />
+
+        {epfCompleted && epfCompleted !== 'Not Applicable' && (
+          <div className="space-y-4 p-4 bg-gray-50 rounded-lg">
+            <Input
+              label="Beneficiary"
+              labelCn="指定受益人"
+              placeholder="Name of beneficiary"
+              {...register('investments.epfBeneficiary')}
+            />
+            <Input
+              label="Substitute Beneficiary"
+              labelCn="替代受益人"
+              placeholder="Name of substitute beneficiary"
+              {...register('investments.epfSubBeneficiary')}
+            />
+          </div>
+        )}
 
         <Textarea
           label="Remarks - EPF"
