@@ -7,9 +7,10 @@ import { Check } from 'lucide-react';
 interface ProgressBarProps {
   sections: Section[];
   currentStep: number;
+  onStepClick?: (step: number) => void;
 }
 
-export function ProgressBar({ sections, currentStep }: ProgressBarProps) {
+export function ProgressBar({ sections, currentStep, onStepClick }: ProgressBarProps) {
   const progress = ((currentStep + 1) / sections.length) * 100;
 
   return (
@@ -37,19 +38,25 @@ export function ProgressBar({ sections, currentStep }: ProgressBarProps) {
           {sections.map((section, index) => (
             <div
               key={section.id}
-              className={`
-                flex flex-col items-center
-                ${index <= currentStep ? 'text-[#1e3a5f]' : 'text-gray-400'}
-              `}
+              className="group relative flex flex-col items-center"
             >
-              <div className={`
-                w-6 h-6 rounded-full flex items-center justify-center text-xs font-medium
-                transition-all duration-300
-                ${index < currentStep ? 'bg-[#1e3a5f] text-white' : ''}
-                ${index === currentStep ? 'bg-[#c9a962] text-white ring-4 ring-[#c9a962]/20' : ''}
-                ${index > currentStep ? 'bg-gray-200 text-gray-500' : ''}
-              `}>
+              <button
+                type="button"
+                onClick={() => onStepClick?.(index)}
+                className={`
+                  w-6 h-6 rounded-full flex items-center justify-center text-xs font-medium
+                  transition-all duration-300 cursor-pointer
+                  ${index < currentStep ? 'bg-[#1e3a5f] text-white hover:bg-[#2d4a6f]' : ''}
+                  ${index === currentStep ? 'bg-[#c9a962] text-white ring-4 ring-[#c9a962]/20' : ''}
+                  ${index > currentStep ? 'bg-gray-200 text-gray-500 hover:bg-gray-300' : ''}
+                `}
+                title={section.title}
+              >
                 {index < currentStep ? <Check size={14} /> : index + 1}
+              </button>
+              <div className="absolute bottom-full mb-2 px-2 py-1 bg-gray-800 text-white text-xs rounded whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none z-10">
+                <div className="font-medium">{section.title}</div>
+                <div className="text-gray-300">{section.titleCn}</div>
               </div>
             </div>
           ))}

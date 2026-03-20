@@ -3,8 +3,10 @@ import { z } from 'zod';
 export const personalInfoSchema = z.object({
   fullName: z.string().min(1),
   gender: z.enum(['male', 'female', 'others']),
+  genderOther: z.string().optional(),
   dateOfBirth: z.string().min(1),
   religion: z.string().min(1),
+  religionOther: z.string().optional(),
   residentialAddress: z.string().min(1),
   nricNo: z.string().optional(),
   passportNo: z.string().optional(),
@@ -20,8 +22,10 @@ export const spouseInfoSchema = z.object({
   isApplicable: z.boolean(),
   fullName: z.string().optional(),
   gender: z.enum(['male', 'female', 'others']).optional(),
+  genderOther: z.string().optional(),
   dateOfBirth: z.string().optional(),
   religion: z.string().optional(),
+  religionOther: z.string().optional(),
   residentialAddress: z.string().optional(),
   nricNo: z.string().optional(),
   passportNo: z.string().optional(),
@@ -34,10 +38,10 @@ export const spouseInfoSchema = z.object({
 });
 
 export const parentInfoSchema = z.object({
-  fatherName: z.string().min(1),
-  fatherStatus: z.enum(['living', 'deceased']),
-  motherName: z.string().min(1),
-  motherStatus: z.enum(['living', 'deceased']),
+  fatherStatus: z.enum(['living', 'deceased', 'notApplicable']),
+  fatherName: z.string().optional(),
+  motherStatus: z.enum(['living', 'deceased', 'notApplicable']),
+  motherName: z.string().optional(),
 });
 
 export const beneficiarySchema = z.object({

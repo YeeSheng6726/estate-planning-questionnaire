@@ -32,8 +32,10 @@ const defaultValues: FormData = {
   personalInfo: {
     fullName: '',
     gender: 'male',
+    genderOther: '',
     dateOfBirth: '',
     religion: '',
+    religionOther: '',
     residentialAddress: '',
     nricNo: '',
     passportNo: '',
@@ -48,8 +50,10 @@ const defaultValues: FormData = {
     isApplicable: false,
     fullName: '',
     gender: 'male',
+    genderOther: '',
     dateOfBirth: '',
     religion: '',
+    religionOther: '',
     residentialAddress: '',
     nricNo: '',
     passportNo: '',
@@ -61,16 +65,16 @@ const defaultValues: FormData = {
     employerName: '',
   },
   parentsTestator: {
-    fatherName: '',
     fatherStatus: 'living',
-    motherName: '',
+    fatherName: '',
     motherStatus: 'living',
+    motherName: '',
   },
   parentsSpouse: {
-    fatherName: '',
     fatherStatus: 'living',
-    motherName: '',
+    fatherName: '',
     motherStatus: 'living',
+    motherName: '',
   },
   beneficiaries: [],
   financialDependent: {
@@ -220,9 +224,9 @@ export function MultiStepForm() {
       case 1:
         return <SpouseInfoSection register={register} errors={errors} watch={watch} setValue={setValue} />;
       case 2:
-        return <ParentInfoSection register={register} errors={errors} title="Testator's Parents" titleCn="立遗嘱人的父母" prefix="parentsTestator" />;
+        return <ParentInfoSection register={register} errors={errors} watch={watch} title="Testator's Parents" titleCn="立遗嘱人的父母" prefix="parentsTestator" />;
       case 3:
-        return <ParentInfoSection register={register} errors={errors} title="Spouse's Parents" titleCn="配偶的父母" prefix="parentsSpouse" />;
+        return <ParentInfoSection register={register} errors={errors} watch={watch} title="Spouse's Parents" titleCn="配偶的父母" prefix="parentsSpouse" />;
       case 4:
         return <BeneficiarySection register={register} errors={errors} watch={watch} setValue={setValue} />;
       case 5:
@@ -298,7 +302,11 @@ export function MultiStepForm() {
           </div>
 
           <div className="mb-8 pb-6 border-b border-gray-200">
-            <ProgressBar sections={formSections} currentStep={currentStep} />
+            <ProgressBar 
+              sections={formSections} 
+              currentStep={currentStep}
+              onStepClick={(step) => setCurrentStep(step)}
+            />
           </div>
 
           {(() => {

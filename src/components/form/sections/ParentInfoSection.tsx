@@ -1,6 +1,6 @@
 'use client';
 
-import { UseFormRegister, FieldErrors } from 'react-hook-form';
+import { UseFormRegister, FieldErrors, UseFormWatch } from 'react-hook-form';
 import { Input } from '@/components/ui/Input';
 import { RadioGroup } from '@/components/ui/RadioGroup';
 import { FormData } from '@/lib/types';
@@ -8,12 +8,26 @@ import { FormData } from '@/lib/types';
 interface Props {
   register: UseFormRegister<FormData>;
   errors: FieldErrors<FormData>;
+  watch: UseFormWatch<FormData>;
   title: string;
   titleCn: string;
   prefix: 'parentsTestator' | 'parentsSpouse';
 }
 
-export function ParentInfoSection({ register, errors, title, titleCn, prefix }: Props) {
+export function ParentInfoSection({ register, errors, watch, title, titleCn, prefix }: Props) {
+  const watchData = watch();
+  const fatherStatus = watchData[prefix]?.fatherStatus;
+  const motherStatus = watchData[prefix]?.motherStatus;
+  
+  const isSpouseParents = prefix === 'parentsSpouse';
+  const showNotApplicable = isSpouseParents;
+
+  const statusOptions = [
+    { value: 'living', label: 'Living', labelCn: '在世' },
+    { value: 'deceased', label: 'Deceased', labelCn: '已故' },
+    ...(showNotApplicable ? [{ value: 'notApplicable', label: 'Not Applicable', labelCn: '不适用' }] : []),
+  ];
+
   return (
     <div className="space-y-6">
       <div className="bg-gradient-to-r from-[#1e3a5f]/5 to-[#c9a962]/5 p-4 rounded-lg mb-6">
@@ -29,23 +43,21 @@ export function ParentInfoSection({ register, errors, title, titleCn, prefix }: 
             Father / 父亲
           </h4>
           <div className="space-y-4">
-            <Input
-              label="Full Name"
-              labelCn="姓名"
-              placeholder="Father's name"
-              error={errors[prefix]?.fatherName?.message}
-              {...register(`${prefix}.fatherName`)}
-            />
             <RadioGroup
               label="Status"
               labelCn="状况"
-              options={[
-                { value: 'living', label: 'Living', labelCn: '在世' },
-                { value: 'deceased', label: 'Deceased', labelCn: '已故' },
-              ]}
+              options={statusOptions}
               horizontal
               {...register(`${prefix}.fatherStatus`)}
             />
+            {fatherStatus !== 'deceased' && fatherStatus !== 'notApplicable' && (
+              <Input
+                label="Full Name"
+                labelCn="姓名"
+                placeholder="Father's name"
+                {...register(`${prefix}.fatherName`)}
+              />
+            )}
           </div>
         </div>
 
@@ -54,23 +66,21 @@ export function ParentInfoSection({ register, errors, title, titleCn, prefix }: 
             Mother / 母亲
           </h4>
           <div className="space-y-4">
-            <Input
-              label="Full Name"
-              labelCn="姓名"
-              placeholder="Mother's name"
-              error={errors[prefix]?.motherName?.message}
-              {...register(`${prefix}.motherName`)}
-            />
             <RadioGroup
               label="Status"
               labelCn="状况"
-              options={[
-                { value: 'living', label: 'Living', labelCn: '在世' },
-                { value: 'deceased', label: 'Deceased', labelCn: '已故' },
-              ]}
+              options={statusOptions}
               horizontal
               {...register(`${prefix}.motherStatus`)}
             />
+            {motherStatus !== 'deceased' && motherStatus !== 'notApplicable' && (
+              <Input
+                label="Full Name"
+                labelCn="姓名"
+                placeholder="Mother's name"
+                {...register(`${prefix}.motherName`)}
+              />
+            )}
           </div>
         </div>
       </div>

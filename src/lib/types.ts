@@ -1,8 +1,10 @@
 export interface PersonalInfo {
   fullName: string;
   gender: 'male' | 'female' | 'others';
+  genderOther: string;
   dateOfBirth: string;
   religion: string;
+  religionOther: string;
   residentialAddress: string;
   nricNo: string;
   passportNo: string;
@@ -14,15 +16,16 @@ export interface PersonalInfo {
   employerName: string;
 }
 
-export interface SpouseInfo extends PersonalInfo {
+export interface SpouseInfo extends Omit<PersonalInfo, 'fullName'> {
   isApplicable: boolean;
+  fullName: string;
 }
 
 export interface ParentInfo {
+  fatherStatus: 'living' | 'deceased' | 'notApplicable';
   fatherName: string;
-  fatherStatus: 'living' | 'deceased';
+  motherStatus: 'living' | 'deceased' | 'notApplicable';
   motherName: string;
-  motherStatus: 'living' | 'deceased';
 }
 
 export interface Beneficiary {

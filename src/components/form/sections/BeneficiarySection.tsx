@@ -26,7 +26,7 @@ export function BeneficiarySection({ register, errors, setValue, watch }: Props)
       mobileNo: '',
       address: '',
     };
-    setValue('beneficiaries', [...beneficiaries, newBeneficiary]);
+    setValue('beneficiaries', [...beneficiaries, newBeneficiary], { shouldValidate: true });
   };
 
   const removeBeneficiary = (index: number) => {
@@ -58,25 +58,20 @@ export function BeneficiarySection({ register, errors, setValue, watch }: Props)
         </p>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <Input
-          label="No. of Children"
-          labelCn="孩子数目"
-          type="number"
-          min="0"
-          placeholder="0"
-          {...register('beneficiaries', { valueAsNumber: true })}
-        />
-      </div>
-
       <div className="space-y-4">
-        {beneficiaries.map((_, index) => (
-          <div key={index} className="p-4 bg-gray-50 rounded-lg border border-gray-200">
+        {beneficiaries.length === 0 && (
+          <div className="text-center p-6 bg-gray-50 rounded-lg">
+            <p className="text-gray-500 mb-4">No beneficiaries added yet</p>
+          </div>
+        )}
+
+        {beneficiaries.map((beneficiary, index) => (
+          <div key={beneficiary.id || index} className="p-4 bg-gray-50 rounded-lg border border-gray-200">
             <div className="flex justify-between items-center mb-4">
               <h4 className="font-medium text-[#1e3a5f]">
                 Beneficiary {index + 1} / 受益人 {index + 1}
               </h4>
-              {beneficiaries.length > 1 && (
+              {beneficiaries.length > 0 && (
                 <Button
                   type="button"
                   variant="outline"
@@ -137,7 +132,7 @@ export function BeneficiarySection({ register, errors, setValue, watch }: Props)
       {beneficiaries.length < 6 && (
         <Button
           type="button"
-          variant="outline"
+          variant="secondary"
           onClick={addBeneficiary}
           className="w-full"
         >
