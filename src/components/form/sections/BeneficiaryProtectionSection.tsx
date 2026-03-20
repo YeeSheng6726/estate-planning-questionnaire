@@ -33,7 +33,6 @@ export function BeneficiaryProtectionSection({ register, errors, setValue, watch
         label="Do you have any exclusions or special protection needs?"
         labelCn="您是否有任何排除或特别保护需求？"
         options={[
-          { value: 'false', label: 'No', labelCn: '否' },
           { value: 'true', label: 'Yes', labelCn: '是' },
           { value: 'notApplicable', label: 'Not Applicable', labelCn: '不适用' },
         ]}

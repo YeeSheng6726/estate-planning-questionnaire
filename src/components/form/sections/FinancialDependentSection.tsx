@@ -33,7 +33,6 @@ export function FinancialDependentSection({ register, errors, setValue, watch }:
         label="Do you have financial dependents?"
         labelCn="您是否有经济依赖者？"
         options={[
-          { value: 'false', label: 'No', labelCn: '否' },
           { value: 'true', label: 'Yes', labelCn: '是' },
           { value: 'notApplicable', label: 'Not Applicable', labelCn: '不适用' },
         ]}

@@ -27,7 +27,8 @@ export function BeneficiarySection({ register, errors, setValue, watch }: Props)
       mobileNo: '',
       address: '',
     };
-    setValue('beneficiaries', [...beneficiaries, newBeneficiary], { shouldValidate: true });
+    const updated = [...beneficiaries, newBeneficiary];
+    setValue('beneficiaries', updated);
   };
 
   const removeBeneficiary = (index: number) => {
@@ -57,17 +58,6 @@ export function BeneficiarySection({ register, errors, setValue, watch }: Props)
           Add your children and other beneficiaries. Maximum 10.
           <span className="text-[#c9a962] ml-1">请添加您的子女及其他受益人，最多10位。</span>
         </p>
-      </div>
-
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <Input
-          label="No. of Children"
-          labelCn="孩子数目"
-          type="number"
-          min="0"
-          placeholder="0"
-          {...register('beneficiaries', { valueAsNumber: true })}
-        />
       </div>
 
       <div className="space-y-4">

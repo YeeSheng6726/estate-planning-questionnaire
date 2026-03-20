@@ -6,7 +6,7 @@ import { Select } from '@/components/ui/Select';
 import { RadioGroup } from '@/components/ui/RadioGroup';
 import { Checkbox } from '@/components/ui/Checkbox';
 import { Button } from '@/components/ui/Button';
-import { FormData, RealEstate } from '@/lib/types';
+import { FormData } from '@/lib/types';
 import { Plus, Trash2 } from 'lucide-react';
 
 interface Props {
@@ -18,14 +18,15 @@ interface Props {
 
 export function RealEstateSection({ register, errors, setValue, watch }: Props) {
   const properties = watch().realEstate || [];
+  const allNotApplicable = properties.length > 0 && properties.every(p => p.isNotApplicable);
 
   const addProperty = () => {
-    const newProperty: RealEstate = {
+    const newProperty = {
       id: Date.now().toString(),
       isNotApplicable: false,
       propertyType: '',
       propertyTypeOther: '',
-      ownership: 'sole',
+      ownership: 'sole' as const,
       ownershipOther: '',
       address: '',
       mainBeneficiaries: '',
@@ -38,6 +39,13 @@ export function RealEstateSection({ register, errors, setValue, watch }: Props) 
   const removeProperty = (index: number) => {
     const updated = properties.filter((_, i) => i !== index);
     setValue('realEstate', updated);
+  };
+
+  const toggleAllNotApplicable = (checked: boolean) => {
+    if (checked) {
+      const updated = properties.map(p => ({ ...p, isNotApplicable: true }));
+      setValue('realEstate', updated);
+    }
   };
 
   const propertyTypes = [
@@ -61,6 +69,13 @@ export function RealEstateSection({ register, errors, setValue, watch }: Props) 
           <span className="text-[#c9a962] ml-1">请列出您拥有的所有房产，最多6处。</span>
         </p>
       </div>
+
+      <Checkbox
+        label="Tick if Not Applicable"
+        labelCn="若不适用，请勾选"
+        checked={allNotApplicable}
+        onChange={toggleAllNotApplicable}
+      />
 
       <div className="space-y-4">
         {properties.map((property, index) => (
@@ -166,7 +181,7 @@ export function RealEstateSection({ register, errors, setValue, watch }: Props) 
         ))}
       </div>
 
-      {properties.length < 6 && (
+      {!allNotApplicable && properties.length < 6 && (
         <Button
           type="button"
           variant="secondary"
