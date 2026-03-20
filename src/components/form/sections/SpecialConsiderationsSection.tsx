@@ -13,7 +13,7 @@ interface Props {
   watch: UseFormWatch<FormData>;
 }
 
-export function SpecialConsiderationsSection({ register, errors, setValue, watch }: Props) {
+export function SpecialConsiderationsSection({ register, setValue, watch }: Props) {
   const data = watch().specialConsiderations;
 
   return (

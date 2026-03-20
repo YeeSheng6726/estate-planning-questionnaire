@@ -7,10 +7,8 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { ArrowLeft, ArrowRight, Send, Save, CheckCircle } from 'lucide-react';
 
 import { FormData } from '@/lib/types';
-import { formDataSchema } from '@/lib/validation';
 import { formSections, getSectionTitle } from './sections-config';
 import { ProgressBar } from './ProgressBar';
-import { ErrorBoundary } from './ErrorBoundary';
 import { Button } from '@/components/ui/Button';
 import {
   PersonalInfoSection,
@@ -151,7 +149,6 @@ export function MultiStepForm() {
   const {
     register,
     handleSubmit,
-    control,
     watch,
     setValue,
     reset,
@@ -228,29 +225,27 @@ export function MultiStepForm() {
   };
 
   const renderSection = () => {
-    const section = formSections[currentStep];
-
     switch (currentStep) {
       case 0:
         return <PersonalInfoSection register={register} errors={errors} watch={watch} />;
       case 1:
-        return <SpouseInfoSection register={register} errors={errors} watch={watch} setValue={setValue} />;
+        return <SpouseInfoSection register={register} watch={watch} setValue={setValue} />;
       case 2:
-        return <ParentInfoSection register={register} errors={errors} watch={watch} title="Testator's Parents" titleCn="立遗嘱人的父母" prefix="parentsTestator" />;
+        return <ParentInfoSection register={register} watch={watch} title="Testator's Parents" titleCn="立遗嘱人的父母" prefix="parentsTestator" />;
       case 3:
-        return <ParentInfoSection register={register} errors={errors} watch={watch} title="Spouse's Parents" titleCn="配偶的父母" prefix="parentsSpouse" />;
+        return <ParentInfoSection register={register} watch={watch} title="Spouse's Parents" titleCn="配偶的父母" prefix="parentsSpouse" />;
       case 4:
-        return <BeneficiarySection register={register} errors={errors} watch={watch} setValue={setValue} />;
+        return <BeneficiarySection register={register} watch={watch} setValue={setValue} />;
       case 5:
-        return <FinancialDependentSection register={register} errors={errors} watch={watch} setValue={setValue} />;
+        return <FinancialDependentSection register={register} watch={watch} />;
       case 6:
-        return <BeneficiaryProtectionSection register={register} errors={errors} watch={watch} setValue={setValue} />;
+        return <BeneficiaryProtectionSection register={register} watch={watch} />;
       case 7:
-        return <RealEstateSection register={register} errors={errors} watch={watch} setValue={setValue} />;
+        return <RealEstateSection register={register} watch={watch} setValue={setValue} />;
       case 8:
-        return <BankAccountSection register={register} errors={errors} watch={watch} setValue={setValue} />;
+        return <BankAccountSection register={register} watch={watch} setValue={setValue} />;
       case 9:
-        return <VehicleSection register={register} errors={errors} watch={watch} setValue={setValue} />;
+        return <VehicleSection register={register} watch={watch} setValue={setValue} />;
       case 10:
         return <InvestmentsSection register={register} errors={errors} watch={watch} setValue={setValue} />;
       case 11:

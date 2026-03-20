@@ -1,20 +1,19 @@
 'use client';
 
-import { UseFormRegister, FieldErrors, UseFormWatch } from 'react-hook-form';
+import { UseFormRegister, UseFormWatch } from 'react-hook-form';
 import { Input } from '@/components/ui/Input';
 import { RadioGroup } from '@/components/ui/RadioGroup';
 import { FormData } from '@/lib/types';
 
 interface Props {
   register: UseFormRegister<FormData>;
-  errors: FieldErrors<FormData>;
   watch: UseFormWatch<FormData>;
   title: string;
   titleCn: string;
   prefix: 'parentsTestator' | 'parentsSpouse';
 }
 
-export function ParentInfoSection({ register, errors, watch, title, titleCn, prefix }: Props) {
+export function ParentInfoSection({ register, watch, title, titleCn, prefix }: Props) {
   const watchData = watch();
   const fatherStatus = watchData[prefix]?.fatherStatus;
   const motherStatus = watchData[prefix]?.motherStatus;

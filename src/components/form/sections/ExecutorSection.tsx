@@ -2,9 +2,7 @@
 
 import { UseFormRegister, FieldErrors, UseFormSetValue, UseFormWatch } from 'react-hook-form';
 import { Input } from '@/components/ui/Input';
-import { Select } from '@/components/ui/Select';
 import { RadioGroup } from '@/components/ui/RadioGroup';
-import { Textarea } from '@/components/ui/Textarea';
 import { FormData } from '@/lib/types';
 
 interface Props {
@@ -17,7 +15,7 @@ interface Props {
   prefix: 'executor' | 'substituteExecutor';
 }
 
-export function ExecutorSection({ register, errors, setValue, watch, title, titleCn, prefix }: Props) {
+export function ExecutorSection({ register, errors, watch, title, titleCn, prefix }: Props) {
   const executorData = watch()[prefix];
 
   return (

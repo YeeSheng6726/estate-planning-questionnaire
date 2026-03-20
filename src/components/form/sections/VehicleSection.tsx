@@ -1,6 +1,7 @@
 'use client';
 
-import { UseFormRegister, FieldErrors, UseFormSetValue, UseFormWatch } from 'react-hook-form';
+import { useCallback } from 'react';
+import { UseFormRegister, UseFormSetValue, UseFormWatch } from 'react-hook-form';
 import { Input } from '@/components/ui/Input';
 import { Checkbox } from '@/components/ui/Checkbox';
 import { Button } from '@/components/ui/Button';
@@ -9,35 +10,34 @@ import { Plus, Trash2 } from 'lucide-react';
 
 interface Props {
   register: UseFormRegister<FormData>;
-  errors: FieldErrors<FormData>;
   setValue: UseFormSetValue<FormData>;
   watch: UseFormWatch<FormData>;
 }
 
-export function VehicleSection({ register, errors, setValue, watch }: Props) {
-  const vehicles = watch().vehicles || [];
+export function VehicleSection({ register, setValue, watch }: Props) {
+  const vehicles: Vehicle[] = watch('vehicles') || [];
   const allDistributedEqually = vehicles.length > 0 && vehicles.every(v => v.distributeEqually);
 
-  const addVehicle = () => {
+  const addVehicle = useCallback(() => {
     const newVehicle: Vehicle = {
-      id: Date.now().toString(),
+      id: `${Date.now()}-${Math.random().toString(36).slice(2, 9)}`,
       plateNumber: '',
       distributeEqually: allDistributedEqually,
       beneficiary: '',
       substituteBeneficiary: '',
     };
     setValue('vehicles', [...vehicles, newVehicle]);
-  };
+  }, [vehicles, allDistributedEqually, setValue]);
 
-  const removeVehicle = (index: number) => {
+  const removeVehicle = useCallback((index: number) => {
     const updated = vehicles.filter((_, i) => i !== index);
     setValue('vehicles', updated);
-  };
+  }, [vehicles, setValue]);
 
-  const toggleAllDistributedEqually = (checked: boolean) => {
+  const toggleAllDistributedEqually = useCallback((checked: boolean) => {
     const updated = vehicles.map(v => ({ ...v, distributeEqually: checked }));
     setValue('vehicles', updated);
-  };
+  }, [vehicles, setValue]);
 
   return (
     <div className="space-y-6">
@@ -84,7 +84,6 @@ export function VehicleSection({ register, errors, setValue, watch }: Props) {
                 label="Plate Number"
                 labelCn="车牌号码"
                 placeholder="e.g., ABC 1234"
-                error={errors.vehicles?.[index]?.plateNumber?.message}
                 {...register(`vehicles.${index}.plateNumber`)}
               />
 

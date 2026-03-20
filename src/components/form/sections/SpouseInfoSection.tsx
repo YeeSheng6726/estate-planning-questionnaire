@@ -1,6 +1,6 @@
 'use client';
 
-import { UseFormRegister, FieldErrors, UseFormWatch, UseFormSetValue } from 'react-hook-form';
+import { UseFormRegister, UseFormWatch, UseFormSetValue } from 'react-hook-form';
 import { Input } from '@/components/ui/Input';
 import { Select } from '@/components/ui/Select';
 import { RadioGroup } from '@/components/ui/RadioGroup';
@@ -9,12 +9,11 @@ import { FormData } from '@/lib/types';
 
 interface Props {
   register: UseFormRegister<FormData>;
-  errors: FieldErrors<FormData>;
   watch: UseFormWatch<FormData>;
   setValue: UseFormSetValue<FormData>;
 }
 
-export function SpouseInfoSection({ register, errors, watch, setValue }: Props) {
+export function SpouseInfoSection({ register, watch, setValue }: Props) {
   const spouseData = watch().spouseInfo;
   const personalData = watch().personalInfo;
   const isMarried = personalData?.maritalStatus === 'Married' || personalData?.maritalStatus === 'C. Married 已婚';

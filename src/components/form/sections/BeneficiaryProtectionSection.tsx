@@ -1,18 +1,16 @@
 'use client';
 
-import { UseFormRegister, FieldErrors, UseFormSetValue, UseFormWatch } from 'react-hook-form';
+import { UseFormRegister, UseFormWatch } from 'react-hook-form';
 import { Textarea } from '@/components/ui/Textarea';
 import { RadioGroup } from '@/components/ui/RadioGroup';
 import { FormData } from '@/lib/types';
 
 interface Props {
   register: UseFormRegister<FormData>;
-  errors: FieldErrors<FormData>;
-  setValue: UseFormSetValue<FormData>;
   watch: UseFormWatch<FormData>;
 }
 
-export function BeneficiaryProtectionSection({ register, errors, setValue, watch }: Props) {
+export function BeneficiaryProtectionSection({ register, watch }: Props) {
   const data = watch().beneficiaryProtection;
   const hasExclusions = data?.hasExclusions;
 

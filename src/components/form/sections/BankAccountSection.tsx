@@ -1,6 +1,7 @@
 'use client';
 
-import { UseFormRegister, FieldErrors, UseFormSetValue, UseFormWatch } from 'react-hook-form';
+import { useCallback } from 'react';
+import { UseFormRegister, UseFormSetValue, UseFormWatch } from 'react-hook-form';
 import { Input } from '@/components/ui/Input';
 import { Checkbox } from '@/components/ui/Checkbox';
 import { Button } from '@/components/ui/Button';
@@ -9,35 +10,34 @@ import { Plus, Trash2 } from 'lucide-react';
 
 interface Props {
   register: UseFormRegister<FormData>;
-  errors: FieldErrors<FormData>;
   setValue: UseFormSetValue<FormData>;
   watch: UseFormWatch<FormData>;
 }
 
-export function BankAccountSection({ register, errors, setValue, watch }: Props) {
-  const accounts = watch().bankAccounts || [];
+export function BankAccountSection({ register, setValue, watch }: Props) {
+  const accounts: BankAccount[] = watch('bankAccounts') || [];
   const allDistributedEqually = accounts.length > 0 && accounts.every(a => a.distributeEqually);
 
-  const addAccount = () => {
+  const addAccount = useCallback(() => {
     const newAccount: BankAccount = {
-      id: Date.now().toString(),
+      id: `${Date.now()}-${Math.random().toString(36).slice(2, 9)}`,
       bankName: '',
       distributeEqually: allDistributedEqually,
       mainBeneficiaries: '',
       substituteBeneficiaries: '',
     };
     setValue('bankAccounts', [...accounts, newAccount]);
-  };
+  }, [accounts, allDistributedEqually, setValue]);
 
-  const removeAccount = (index: number) => {
+  const removeAccount = useCallback((index: number) => {
     const updated = accounts.filter((_, i) => i !== index);
     setValue('bankAccounts', updated);
-  };
+  }, [accounts, setValue]);
 
-  const toggleAllDistributedEqually = (checked: boolean) => {
+  const toggleAllDistributedEqually = useCallback((checked: boolean) => {
     const updated = accounts.map(a => ({ ...a, distributeEqually: checked }));
     setValue('bankAccounts', updated);
-  };
+  }, [accounts, setValue]);
 
   return (
     <div className="space-y-6">

@@ -18,7 +18,7 @@ interface RadioGroupProps extends Omit<InputHTMLAttributes<HTMLInputElement>, 't
 }
 
 export const RadioGroup = forwardRef<HTMLInputElement, RadioGroupProps>(
-  ({ className = '', label, labelCn, options, error, horizontal, ...props }, ref) => {
+  ({ label, labelCn, options, error, horizontal, ...props }, ref) => {
     return (
       <div className="w-full">
         {label && (

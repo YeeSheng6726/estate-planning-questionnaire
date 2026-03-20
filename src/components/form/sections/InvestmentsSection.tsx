@@ -4,7 +4,6 @@ import { UseFormRegister, FieldErrors, UseFormSetValue, UseFormWatch } from 'rea
 import { Input } from '@/components/ui/Input';
 import { Select } from '@/components/ui/Select';
 import { Textarea } from '@/components/ui/Textarea';
-import { RadioGroup } from '@/components/ui/RadioGroup';
 import { FormData } from '@/lib/types';
 
 interface Props {
@@ -14,7 +13,7 @@ interface Props {
   watch: UseFormWatch<FormData>;
 }
 
-export function InvestmentsSection({ register, errors, setValue, watch }: Props) {
+export function InvestmentsSection({ register, errors, watch }: Props) {
   const investments = watch().investments;
 
   const insuranceCompleted = investments?.insuranceNominationCompleted;

@@ -1,6 +1,7 @@
 'use client';
 
-import { UseFormRegister, FieldErrors, UseFormSetValue, UseFormWatch } from 'react-hook-form';
+import { useCallback } from 'react';
+import { UseFormRegister, UseFormSetValue, UseFormWatch } from 'react-hook-form';
 import { Input } from '@/components/ui/Input';
 import { Select } from '@/components/ui/Select';
 import { Button } from '@/components/ui/Button';
@@ -9,18 +10,16 @@ import { Plus, Trash2 } from 'lucide-react';
 
 interface Props {
   register: UseFormRegister<FormData>;
-  errors: FieldErrors<FormData>;
   setValue: UseFormSetValue<FormData>;
   watch: UseFormWatch<FormData>;
 }
 
-export function BeneficiarySection({ register, errors, setValue, watch }: Props) {
-  const watchData = watch();
-  const beneficiaries: Beneficiary[] = Array.isArray(watchData?.beneficiaries) ? watchData.beneficiaries : [];
+export function BeneficiarySection({ register, setValue, watch }: Props) {
+  const beneficiaries: Beneficiary[] = watch('beneficiaries') || [];
 
-  const addBeneficiary = () => {
+  const addBeneficiary = useCallback(() => {
     const newBeneficiary: Beneficiary = {
-      id: Date.now().toString(),
+      id: `${Date.now()}-${Math.random().toString(36).slice(2, 9)}`,
       fullName: '',
       relationship: '',
       relationshipOther: '',
@@ -30,12 +29,12 @@ export function BeneficiarySection({ register, errors, setValue, watch }: Props)
     };
     const updated = [...beneficiaries, newBeneficiary];
     setValue('beneficiaries', updated, { shouldValidate: false });
-  };
+  }, [beneficiaries, setValue]);
 
-  const removeBeneficiary = (index: number) => {
+  const removeBeneficiary = useCallback((index: number) => {
     const updated = beneficiaries.filter((_, i) => i !== index);
     setValue('beneficiaries', updated, { shouldValidate: false });
-  };
+  }, [beneficiaries, setValue]);
 
   const relationshipOptions = [
     { value: 'Son', label: 'Son', labelCn: '儿子' },
@@ -70,7 +69,7 @@ export function BeneficiarySection({ register, errors, setValue, watch }: Props)
 
         {beneficiaries.map((beneficiary, index) => {
           const relationshipKey = `beneficiaries.${index}.relationship` as const;
-          const currentRelationship = watchData?.beneficiaries?.[index]?.relationship;
+          const currentRelationship = beneficiary.relationship;
 
           return (
             <div key={beneficiary.id || index} className="p-4 bg-gray-50 rounded-lg border border-gray-200">

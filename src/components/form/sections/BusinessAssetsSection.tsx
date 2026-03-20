@@ -1,7 +1,6 @@
 'use client';
 
 import { UseFormRegister, FieldErrors, UseFormSetValue, UseFormWatch } from 'react-hook-form';
-import { Input } from '@/components/ui/Input';
 import { Textarea } from '@/components/ui/Textarea';
 import { Checkbox } from '@/components/ui/Checkbox';
 import { FormData } from '@/lib/types';
@@ -13,7 +12,7 @@ interface Props {
   watch: UseFormWatch<FormData>;
 }
 
-export function BusinessAssetsSection({ register, errors, setValue, watch }: Props) {
+export function BusinessAssetsSection({ register, setValue, watch }: Props) {
   const data = watch().businessAssets;
 
   return (

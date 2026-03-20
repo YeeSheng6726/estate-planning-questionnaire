@@ -1,32 +1,32 @@
 'use client';
 
-import { UseFormRegister, FieldErrors, UseFormSetValue, UseFormWatch } from 'react-hook-form';
+import { useCallback } from 'react';
+import { UseFormRegister, UseFormSetValue, UseFormWatch } from 'react-hook-form';
 import { Input } from '@/components/ui/Input';
 import { Select } from '@/components/ui/Select';
 import { RadioGroup } from '@/components/ui/RadioGroup';
 import { Checkbox } from '@/components/ui/Checkbox';
 import { Button } from '@/components/ui/Button';
-import { FormData } from '@/lib/types';
+import { FormData, RealEstate } from '@/lib/types';
 import { Plus, Trash2 } from 'lucide-react';
 
 interface Props {
   register: UseFormRegister<FormData>;
-  errors: FieldErrors<FormData>;
   setValue: UseFormSetValue<FormData>;
   watch: UseFormWatch<FormData>;
 }
 
-export function RealEstateSection({ register, errors, setValue, watch }: Props) {
-  const properties = watch().realEstate || [];
+export function RealEstateSection({ register, setValue, watch }: Props) {
+  const properties: RealEstate[] = watch('realEstate') || [];
   const allNotApplicable = properties.length > 0 && properties.every(p => p.isNotApplicable);
 
-  const addProperty = () => {
-    const newProperty = {
-      id: Date.now().toString(),
+  const addProperty = useCallback(() => {
+    const newProperty: RealEstate = {
+      id: `${Date.now()}-${Math.random().toString(36).slice(2, 9)}`,
       isNotApplicable: false,
       propertyType: '',
       propertyTypeOther: '',
-      ownership: 'sole' as const,
+      ownership: 'sole',
       ownershipOther: '',
       address: '',
       mainBeneficiaries: '',
@@ -34,19 +34,19 @@ export function RealEstateSection({ register, errors, setValue, watch }: Props) 
       hasMortgageInsurance: false,
     };
     setValue('realEstate', [...properties, newProperty]);
-  };
+  }, [properties, setValue]);
 
-  const removeProperty = (index: number) => {
+  const removeProperty = useCallback((index: number) => {
     const updated = properties.filter((_, i) => i !== index);
     setValue('realEstate', updated);
-  };
+  }, [properties, setValue]);
 
-  const toggleAllNotApplicable = (checked: boolean) => {
+  const toggleAllNotApplicable = useCallback((checked: boolean) => {
     if (checked) {
       const updated = properties.map(p => ({ ...p, isNotApplicable: true }));
       setValue('realEstate', updated);
     }
-  };
+  }, [properties, setValue]);
 
   const propertyTypes = [
     { value: 'Condominium', label: 'Condominium', labelCn: '公寓' },
