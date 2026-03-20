@@ -13,11 +13,11 @@ interface Props {
   title: string;
   titleCn: string;
   subtitle: string;
-  prefix: 'executor' | 'substituteExecutor';
+  prefix: 'trustee' | 'substituteTrustee';
 }
 
-export function ExecutorSection({ register, errors, watch, title, titleCn, subtitle, prefix }: Props) {
-  const executorData = watch(prefix);
+export function TrusteeSection({ register, errors, watch, title, titleCn, subtitle, prefix }: Props) {
+  const trusteeData = watch(prefix);
 
   return (
     <div className="space-y-6">
@@ -40,7 +40,7 @@ export function ExecutorSection({ register, errors, watch, title, titleCn, subti
         {...register(`${prefix}.appointmentType`)}
       />
 
-      {executorData?.appointmentType === 'other' && (
+      {trusteeData?.appointmentType === 'other' && (
         <Input
           label="Please provide details"
           labelCn="若选择其他，请提供资料"
@@ -49,7 +49,7 @@ export function ExecutorSection({ register, errors, watch, title, titleCn, subti
         />
       )}
 
-      {executorData?.appointmentType !== 'spouse' && (
+      {trusteeData?.appointmentType !== 'spouse' && (
         <div className="border-t border-gray-200 pt-6 mt-6">
           <h4 className="font-medium text-[#1e3a5f] mb-4">{subtitle}</h4>
           
@@ -59,7 +59,6 @@ export function ExecutorSection({ register, errors, watch, title, titleCn, subti
                 label="Full Name as per NRIC"
                 labelCn="姓名"
                 placeholder="As per NRIC"
-                error={errors[prefix]?.fullName?.message}
                 {...register(`${prefix}.fullName`)}
               />
 
@@ -67,7 +66,6 @@ export function ExecutorSection({ register, errors, watch, title, titleCn, subti
                 label="NRIC"
                 labelCn="身份证号码"
                 placeholder="e.g., 700101-01-1234"
-                error={errors[prefix]?.nric?.message}
                 {...register(`${prefix}.nric`)}
               />
             </div>
@@ -77,7 +75,6 @@ export function ExecutorSection({ register, errors, watch, title, titleCn, subti
                 label="Relationship"
                 labelCn="关系"
                 placeholder="e.g., Spouse, Son, etc."
-                error={errors[prefix]?.relationship?.message}
                 {...register(`${prefix}.relationship`)}
               />
 
@@ -86,7 +83,6 @@ export function ExecutorSection({ register, errors, watch, title, titleCn, subti
                 labelCn="电话号码"
                 type="tel"
                 placeholder="+60123456789"
-                error={errors[prefix]?.mobileNo?.message}
                 {...register(`${prefix}.mobileNo`)}
               />
             </div>
@@ -95,7 +91,6 @@ export function ExecutorSection({ register, errors, watch, title, titleCn, subti
               label="Residential Address"
               labelCn="住宅地址"
               placeholder="Complete residential address"
-              error={errors[prefix]?.address?.message}
               {...register(`${prefix}.address`)}
             />
           </div>

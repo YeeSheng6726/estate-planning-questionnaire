@@ -13,7 +13,7 @@ export const formSections: Section[] = [
   { id: 10, title: 'Vehicles', titleCn: '车辆', shortTitle: 'Vehicles' },
   { id: 11, title: 'Investments & Insurance', titleCn: '投资与保险', shortTitle: 'Investments' },
   { id: 12, title: 'Business & Assets', titleCn: '商业与资产', shortTitle: 'Business' },
-  { id: 13, title: 'Executor & Trustee', titleCn: '执行人与受托人', shortTitle: 'Executor' },
+  { id: 13, title: 'Executor, Trustee & Guardian', titleCn: '执行人、受托人及监护人', shortTitle: 'Executor' },
   { id: 14, title: 'Special Considerations', titleCn: '特别考量', shortTitle: 'Special' },
 ];
 

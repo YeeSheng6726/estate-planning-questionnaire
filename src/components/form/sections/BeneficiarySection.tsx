@@ -92,10 +92,10 @@ export function BeneficiarySection({ register, setValue, watch }: Props) {
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         <Select
-          label="Number of Children"
-          labelCn="子女数量"
+          label="No. of Legitimate Children"
+          labelCn="合法子女人数"
           options={childCountOptions}
-          {...register('numberOfChildren')}
+          {...register('noOfLegitimateChildren')}
         />
       </div>
 

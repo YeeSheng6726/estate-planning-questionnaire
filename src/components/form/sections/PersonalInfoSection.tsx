@@ -158,11 +158,19 @@ export function PersonalInfoSection({ register, errors, watch }: Props) {
           options={[
             { value: 'Single', label: 'Single', labelCn: '未婚' },
             { value: 'Married', label: 'Married', labelCn: '已婚' },
+            { value: 'Contemplation', label: 'Contemplation of marriage', labelCn: '即将结婚' },
             { value: 'Divorced', label: 'Divorced', labelCn: '离异' },
             { value: 'Widowed', label: 'Widowed', labelCn: '丧偶' },
           ]}
           error={errors.personalInfo?.maritalStatus?.message}
           {...register('personalInfo.maritalStatus')}
+        />
+
+        <Input
+          label="Date of Marriage"
+          labelCn="结婚日期"
+          type="date"
+          {...register('personalInfo.dateOfMarriage')}
         />
       </div>
 

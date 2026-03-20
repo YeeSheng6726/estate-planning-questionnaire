@@ -12,6 +12,7 @@ export interface PersonalInfo {
   mobileNo: string;
   email: string;
   maritalStatus: string;
+  dateOfMarriage: string;
   occupation: string;
   employerName: string;
 }
@@ -112,6 +113,26 @@ export interface Executor {
   address: string;
 }
 
+export interface Trustee {
+  appointmentType: 'spouse' | 'adultChild' | 'professional' | 'other';
+  otherDetails: string;
+  fullName: string;
+  nric: string;
+  relationship: string;
+  mobileNo: string;
+  address: string;
+}
+
+export interface Guardian {
+  appointmentType: 'spouse' | 'adultChild' | 'professional' | 'other';
+  otherDetails: string;
+  fullName: string;
+  nric: string;
+  relationship: string;
+  mobileNo: string;
+  address: string;
+}
+
 export interface SpecialConsiderations {
   educationFund: string;
   childrenInheritanceAge: string;
@@ -127,7 +148,7 @@ export interface FormData {
   spouseInfo: SpouseInfo;
   parentsTestator: ParentInfo;
   parentsSpouse: ParentInfo;
-  numberOfChildren: number;
+  noOfLegitimateChildren: number;
   beneficiaries: Beneficiary[];
   financialDependent: FinancialDependent;
   beneficiaryProtection: BeneficiaryProtection;
@@ -138,6 +159,9 @@ export interface FormData {
   businessAssets: BusinessAssets;
   executor: Executor;
   substituteExecutor: Executor;
+  trustee: Trustee;
+  substituteTrustee: Trustee;
+  guardian: Guardian;
   specialConsiderations: SpecialConsiderations;
 }
 

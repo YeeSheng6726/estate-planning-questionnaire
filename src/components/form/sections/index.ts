@@ -11,3 +11,5 @@ export { InvestmentsSection } from './InvestmentsSection';
 export { BusinessAssetsSection } from './BusinessAssetsSection';
 export { ExecutorSection } from './ExecutorSection';
 export { SpecialConsiderationsSection } from './SpecialConsiderationsSection';
+export { TrusteeSection } from './TrusteeSection';
+export { GuardianSection } from './GuardianSection';

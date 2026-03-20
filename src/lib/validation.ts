@@ -14,6 +14,7 @@ export const personalInfoSchema = z.object({
   mobileNo: z.string().min(1),
   email: z.string().email(),
   maritalStatus: z.string().min(1),
+  dateOfMarriage: z.string().optional(),
   occupation: z.string().min(1),
   employerName: z.string().optional(),
 });
@@ -33,6 +34,7 @@ export const spouseInfoSchema = z.object({
   mobileNo: z.string().optional(),
   email: z.string().email().optional().or(z.literal('')),
   maritalStatus: z.string().optional(),
+  dateOfMarriage: z.string().optional(),
   occupation: z.string().optional(),
   employerName: z.string().optional(),
 });
@@ -121,11 +123,31 @@ export const businessAssetsSchema = z.object({
 export const executorSchema = z.object({
   appointmentType: z.enum(['spouse', 'adultChild', 'professional', 'other']),
   otherDetails: z.string().optional(),
-  fullName: z.string().min(1),
-  nric: z.string().min(1),
-  relationship: z.string().min(1),
-  mobileNo: z.string().min(1),
-  address: z.string().min(1),
+  fullName: z.string().optional(),
+  nric: z.string().optional(),
+  relationship: z.string().optional(),
+  mobileNo: z.string().optional(),
+  address: z.string().optional(),
+});
+
+export const trusteeSchema = z.object({
+  appointmentType: z.enum(['spouse', 'adultChild', 'professional', 'other']),
+  otherDetails: z.string().optional(),
+  fullName: z.string().optional(),
+  nric: z.string().optional(),
+  relationship: z.string().optional(),
+  mobileNo: z.string().optional(),
+  address: z.string().optional(),
+});
+
+export const guardianSchema = z.object({
+  appointmentType: z.enum(['spouse', 'adultChild', 'professional', 'other']),
+  otherDetails: z.string().optional(),
+  fullName: z.string().optional(),
+  nric: z.string().optional(),
+  relationship: z.string().optional(),
+  mobileNo: z.string().optional(),
+  address: z.string().optional(),
 });
 
 export const specialConsiderationsSchema = z.object({
@@ -143,7 +165,7 @@ export const formDataSchema = z.object({
   spouseInfo: spouseInfoSchema,
   parentsTestator: parentInfoSchema,
   parentsSpouse: parentInfoSchema,
-  numberOfChildren: z.number(),
+  noOfLegitimateChildren: z.number(),
   beneficiaries: z.array(beneficiarySchema),
   financialDependent: financialDependentSchema,
   beneficiaryProtection: beneficiaryProtectionSchema,
@@ -154,5 +176,8 @@ export const formDataSchema = z.object({
   businessAssets: businessAssetsSchema,
   executor: executorSchema,
   substituteExecutor: executorSchema,
+  trustee: trusteeSchema,
+  substituteTrustee: trusteeSchema,
+  guardian: guardianSchema,
   specialConsiderations: specialConsiderationsSchema,
 });

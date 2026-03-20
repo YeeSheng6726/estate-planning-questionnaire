@@ -24,6 +24,8 @@ import {
   BusinessAssetsSection,
   ExecutorSection,
   SpecialConsiderationsSection,
+  TrusteeSection,
+  GuardianSection,
 } from './sections/index';
 
 const defaultValues: FormData = {
@@ -41,6 +43,7 @@ const defaultValues: FormData = {
     mobileNo: '',
     email: '',
     maritalStatus: '',
+    dateOfMarriage: '',
     occupation: '',
     employerName: '',
   },
@@ -59,6 +62,7 @@ const defaultValues: FormData = {
     mobileNo: '',
     email: '',
     maritalStatus: '',
+    dateOfMarriage: '',
     occupation: '',
     employerName: '',
   },
@@ -74,7 +78,7 @@ const defaultValues: FormData = {
     motherStatus: 'living',
     motherName: '',
   },
-  numberOfChildren: 0,
+  noOfLegitimateChildren: 0,
   beneficiaries: [],
   financialDependent: {
     hasDependents: '',
@@ -120,6 +124,33 @@ const defaultValues: FormData = {
     address: '',
   },
   substituteExecutor: {
+    appointmentType: 'spouse',
+    otherDetails: '',
+    fullName: '',
+    nric: '',
+    relationship: '',
+    mobileNo: '',
+    address: '',
+  },
+  trustee: {
+    appointmentType: 'spouse',
+    otherDetails: '',
+    fullName: '',
+    nric: '',
+    relationship: '',
+    mobileNo: '',
+    address: '',
+  },
+  substituteTrustee: {
+    appointmentType: 'spouse',
+    otherDetails: '',
+    fullName: '',
+    nric: '',
+    relationship: '',
+    mobileNo: '',
+    address: '',
+  },
+  guardian: {
     appointmentType: 'spouse',
     otherDetails: '',
     fullName: '',
@@ -258,6 +289,7 @@ export function MultiStepForm() {
               setValue={setValue}
               title="Primary Executor"
               titleCn="主要遗嘱执行人"
+              subtitle="Executor Details / 执行人详情"
               prefix="executor"
             />
             <ExecutorSection
@@ -267,8 +299,59 @@ export function MultiStepForm() {
               setValue={setValue}
               title="Substitute Executor"
               titleCn="替代遗嘱执行人"
+              subtitle="Substitute Executor Details / 替代遗嘱执行人详情"
               prefix="substituteExecutor"
             />
+            <div className="border-t-2 border-[#c9a962] pt-6 mt-6">
+              <div className="bg-yellow-50 p-4 rounded-lg mb-4">
+                <p className="text-sm text-yellow-800">
+                  <strong>PLEASE FILL IN THIS PART WHERE THE TRUSTEES AND EXECUTORS ARE DIFFERENT PERSONS</strong>
+                  <br />
+                  <span className="text-yellow-600">若受托人与遗嘱执行人为不同人士，请填写此部分</span>
+                </p>
+              </div>
+              <TrusteeSection
+                register={register}
+                errors={errors}
+                watch={watch}
+                setValue={setValue}
+                title="Primary Trustee"
+                titleCn="主要受托人"
+                subtitle="Trustee Details / 受托人详情"
+                prefix="trustee"
+              />
+              <div className="mt-6">
+                <TrusteeSection
+                  register={register}
+                  errors={errors}
+                  watch={watch}
+                  setValue={setValue}
+                  title="Substitute Trustee"
+                  titleCn="替代受托人"
+                  subtitle="Substitute Trustee Details / 替代受托人详情"
+                  prefix="substituteTrustee"
+                />
+              </div>
+              <div className="mt-6 border-t-2 border-[#c9a962] pt-6">
+                <div className="bg-yellow-50 p-4 rounded-lg mb-4">
+                  <p className="text-sm text-yellow-800">
+                    <strong>GUARDIAN TO TESTATOR&apos;S MINOR CHILDREN UNDER 21 YEARS OLD</strong>
+                    <br />
+                    <span className="text-yellow-600">委托监护人于立遗嘱者二十一岁以下的孩子</span>
+                  </p>
+                </div>
+                <GuardianSection
+                  register={register}
+                  errors={errors}
+                  watch={watch}
+                  setValue={setValue}
+                  title="Guardian"
+                  titleCn="监护人"
+                  subtitle="Guardian Details / 监护人详情"
+                  prefix="guardian"
+                />
+              </div>
+            </div>
           </div>
         );
       case 13:
