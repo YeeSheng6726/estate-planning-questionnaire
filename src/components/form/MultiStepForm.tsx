@@ -48,7 +48,7 @@ const defaultValues: FormData = {
     employerName: '',
   },
   spouseInfo: {
-    isApplicable: false,
+    isApplicable: true,
     fullName: '',
     gender: '',
     genderOther: '',
