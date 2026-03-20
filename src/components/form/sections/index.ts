@@ -1,0 +1,13 @@
+export { PersonalInfoSection } from './PersonalInfoSection';
+export { SpouseInfoSection } from './SpouseInfoSection';
+export { ParentInfoSection } from './ParentInfoSection';
+export { BeneficiarySection } from './BeneficiarySection';
+export { FinancialDependentSection } from './FinancialDependentSection';
+export { BeneficiaryProtectionSection } from './BeneficiaryProtectionSection';
+export { RealEstateSection } from './RealEstateSection';
+export { BankAccountSection } from './BankAccountSection';
+export { VehicleSection } from './VehicleSection';
+export { InvestmentsSection } from './InvestmentsSection';
+export { BusinessAssetsSection } from './BusinessAssetsSection';
+export { ExecutorSection } from './ExecutorSection';
+export { SpecialConsiderationsSection } from './SpecialConsiderationsSection';

@@ -1,0 +1,136 @@
+export interface PersonalInfo {
+  fullName: string;
+  gender: 'male' | 'female' | 'others';
+  dateOfBirth: string;
+  religion: string;
+  residentialAddress: string;
+  nricNo: string;
+  passportNo: string;
+  nationality: string;
+  mobileNo: string;
+  email: string;
+  maritalStatus: string;
+  occupation: string;
+  employerName: string;
+}
+
+export interface SpouseInfo extends PersonalInfo {
+  isApplicable: boolean;
+}
+
+export interface ParentInfo {
+  fatherName: string;
+  fatherStatus: 'living' | 'deceased';
+  motherName: string;
+  motherStatus: 'living' | 'deceased';
+}
+
+export interface Beneficiary {
+  id: string;
+  fullName: string;
+  relationship: string;
+  nric: string;
+  mobileNo: string;
+  address: string;
+}
+
+export interface FinancialDependent {
+  hasDependents: boolean;
+  description: string;
+}
+
+export interface BeneficiaryProtection {
+  hasExclusions: boolean;
+  description: string;
+}
+
+export interface RealEstate {
+  id: string;
+  propertyType: string;
+  ownership: 'sole' | 'joint';
+  address: string;
+  mainBeneficiaries: string;
+  substituteBeneficiaries: string;
+  hasMortgageInsurance: boolean;
+}
+
+export interface BankAccount {
+  id: string;
+  bankName: string;
+  distributeEqually: boolean;
+  mainBeneficiaries: string;
+  substituteBeneficiaries: string;
+}
+
+export interface Vehicle {
+  id: string;
+  plateNumber: string;
+  distributeEqually: boolean;
+}
+
+export interface Investments {
+  localInvestmentAccount: string;
+  foreignInvestmentAccount: string;
+  unitTrust: string;
+  sspn: string;
+  prs: string;
+  insuranceNominationCompleted: string;
+  insuranceRemarks: string;
+  epfNominationCompleted: string;
+  epfRemarks: string;
+}
+
+export interface BusinessAssets {
+  hasBusiness: boolean;
+  businessDescription: string;
+  hasSuccessionPlan: boolean;
+  collectibles: string;
+  digitalAssets: string;
+  guarantees: string;
+  otherObligations: string;
+}
+
+export interface Executor {
+  appointmentType: 'spouse' | 'adultChild' | 'professional' | 'other';
+  otherDetails: string;
+  fullName: string;
+  nric: string;
+  relationship: string;
+  mobileNo: string;
+  address: string;
+}
+
+export interface SpecialConsiderations {
+  educationFund: boolean;
+  childrenInheritanceAge: string;
+  parentsNeedSupport: boolean;
+  parentsSupportDetails: string;
+  hasSpecialNeedsDependents: boolean;
+  specialNeedsDetails: string;
+  wantTrustee: boolean;
+}
+
+export interface FormData {
+  personalInfo: PersonalInfo;
+  spouseInfo: SpouseInfo;
+  parentsTestator: ParentInfo;
+  parentsSpouse: ParentInfo;
+  beneficiaries: Beneficiary[];
+  financialDependent: FinancialDependent;
+  beneficiaryProtection: BeneficiaryProtection;
+  realEstate: RealEstate[];
+  bankAccounts: BankAccount[];
+  vehicles: Vehicle[];
+  investments: Investments;
+  businessAssets: BusinessAssets;
+  executor: Executor;
+  substituteExecutor: Executor;
+  specialConsiderations: SpecialConsiderations;
+}
+
+export interface Section {
+  id: number;
+  title: string;
+  titleCn: string;
+  shortTitle: string;
+}
