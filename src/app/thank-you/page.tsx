@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { CheckCircle, Home, Mail } from 'lucide-react';
+import { CheckCircle, Home } from 'lucide-react';
 
 export default function ThankYouPage() {
   return (
@@ -16,30 +16,19 @@ export default function ThankYouPage() {
           <p className="text-gray-600 mb-2">谢谢！</p>
 
           <p className="text-gray-600 mb-6">
-            Your estate planning questionnaire has been successfully submitted. 
-            We will review your information and contact you shortly.
+            Yee Sheng will review your information and contact you shortly.
           </p>
           <p className="text-gray-500 text-sm mb-8">
-            您的遗产规划问卷已成功提交。我们将审核您的信息并尽快与您联系。
+            您的遗产规划问卷已成功提交。Yee Sheng 将审核您的信息并尽快与您联系。
           </p>
 
-          <div className="space-y-3">
-            <Link
-              href="/form"
-              className="flex items-center justify-center gap-2 w-full px-6 py-3 bg-[#1e3a5f] text-white rounded-lg hover:bg-[#2d4a6f] transition-colors"
-            >
-              <Home size={18} />
-              Submit Another Response
-            </Link>
-
-            <a
-              href="mailto:contact@example.com"
-              className="flex items-center justify-center gap-2 w-full px-6 py-3 border-2 border-[#1e3a5f] text-[#1e3a5f] rounded-lg hover:bg-[#1e3a5f] hover:text-white transition-colors"
-            >
-              <Mail size={18} />
-              Contact Us
-            </a>
-          </div>
+          <Link
+            href="/form"
+            className="flex items-center justify-center gap-2 w-full px-6 py-3 bg-[#1e3a5f] text-white rounded-lg hover:bg-[#2d4a6f] transition-colors"
+          >
+            <Home size={18} />
+            Submit Another Response / 提交另一份问卷
+          </Link>
         </div>
 
         <p className="text-center text-gray-400 text-xs mt-6">

@@ -85,8 +85,10 @@ export default function HomePage() {
       </main>
 
       <footer className="bg-white border-t border-gray-200 mt-12">
-        <div className="max-w-6xl mx-auto px-4 py-6 text-center text-gray-500 text-sm">
-          &copy; {new Date().getFullYear()} Estate Planning Services. All rights reserved.
+        <div className="max-w-6xl mx-auto px-4 py-6 text-center">
+          <p className="text-gray-500 text-sm italic">
+            <em>Private & Confidential / 私人及保密</em>
+          </p>
         </div>
       </footer>
     </div>
