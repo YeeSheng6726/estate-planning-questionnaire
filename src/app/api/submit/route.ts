@@ -178,7 +178,8 @@ function transformFormData(data: any) {
       "NRIC / 身份证": data.executor?.nric || '',
       "Relationship / 关系": data.executor?.relationship || '',
       "Mobile No. / 电话": data.executor?.mobileNo || '',
-      "Address / 地址": data.executor?.address || ''
+      "Address / 地址": data.executor?.address || '',
+      "Remarks / 备注": data.executor?.remarks || ''
     },
     "Section 13 - Substitute Executor / 替代遗嘱执行人": {
       "Appointment Type / 委任类型": appointmentTypeLabels[data.substituteExecutor?.appointmentType] || '',
@@ -187,7 +188,8 @@ function transformFormData(data: any) {
       "NRIC / 身份证": data.substituteExecutor?.nric || '',
       "Relationship / 关系": data.substituteExecutor?.relationship || '',
       "Mobile No. / 电话": data.substituteExecutor?.mobileNo || '',
-      "Address / 地址": data.substituteExecutor?.address || ''
+      "Address / 地址": data.substituteExecutor?.address || '',
+      "Remarks / 备注": data.substituteExecutor?.remarks || ''
     },
     "Section 13 - Primary Trustee / 主要受托人": {
       "Appointment Type / 委任类型": appointmentTypeLabels[data.trustee?.appointmentType] || '',
@@ -196,7 +198,8 @@ function transformFormData(data: any) {
       "NRIC / 身份证": data.trustee?.nric || '',
       "Relationship / 关系": data.trustee?.relationship || '',
       "Mobile No. / 电话": data.trustee?.mobileNo || '',
-      "Address / 地址": data.trustee?.address || ''
+      "Address / 地址": data.trustee?.address || '',
+      "Remarks / 备注": data.trustee?.remarks || ''
     },
     "Section 13 - Substitute Trustee / 替代受托人": {
       "Appointment Type / 委任类型": appointmentTypeLabels[data.substituteTrustee?.appointmentType] || '',
@@ -205,7 +208,8 @@ function transformFormData(data: any) {
       "NRIC / 身份证": data.substituteTrustee?.nric || '',
       "Relationship / 关系": data.substituteTrustee?.relationship || '',
       "Mobile No. / 电话": data.substituteTrustee?.mobileNo || '',
-      "Address / 地址": data.substituteTrustee?.address || ''
+      "Address / 地址": data.substituteTrustee?.address || '',
+      "Remarks / 备注": data.substituteTrustee?.remarks || ''
     },
     "Section 13 - Guardian / 监护人": {
       "Appointment Type / 委任类型": appointmentTypeLabels[data.guardian?.appointmentType] || '',
@@ -214,7 +218,8 @@ function transformFormData(data: any) {
       "NRIC / 身份证": data.guardian?.nric || '',
       "Relationship / 关系": data.guardian?.relationship || '',
       "Mobile No. / 电话": data.guardian?.mobileNo || '',
-      "Address / 地址": data.guardian?.address || ''
+      "Address / 地址": data.guardian?.address || '',
+      "Remarks / 备注": data.guardian?.remarks || ''
     },
 
     // Section 14: Special Considerations / 特别考量
@@ -225,7 +230,8 @@ function transformFormData(data: any) {
       "Parents Support Details / 父母支持详情": data.specialConsiderations?.parentsSupportDetails || '',
       "Has Special Needs Dependents / 有特殊需求受抚养人": data.specialConsiderations?.hasSpecialNeedsDependents === 'true' ? 'Yes / 是' : 'Not Applicable / 不适用',
       "Special Needs Details / 特殊需求详情": data.specialConsiderations?.specialNeedsDetails || '',
-      "Want Trustee / 设立信托": data.specialConsiderations?.wantTrustee === 'true' ? 'Yes / 是' : 'Not Applicable / 不适用'
+      "Want Trustee / 设立信托": data.specialConsiderations?.wantTrustee === 'true' ? 'Yes / 是' : 'Not Applicable / 不适用',
+      "Additional Details / 附加详情": data.specialConsiderations?.additionalDetails || ''
     },
 
     // Submission Info

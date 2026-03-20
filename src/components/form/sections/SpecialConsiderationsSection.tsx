@@ -117,6 +117,16 @@ export function SpecialConsiderationsSection({ register, watch }: Props) {
         </div>
       </div>
 
+      <div className="p-4 bg-gray-50 rounded-lg mt-6">
+        <Textarea
+          label="Additional Details"
+          labelCn="附加详情"
+          placeholder="Any other details or information not mentioned above"
+          rows={4}
+          {...register('specialConsiderations.additionalDetails')}
+        />
+      </div>
+
       <div className="bg-[#c9a962]/10 p-4 rounded-lg mt-6">
         <p className="text-sm text-[#2d3748]">
           <strong>Note:</strong> Any additional information or specific wishes regarding your estate plan can be noted during our consultation.

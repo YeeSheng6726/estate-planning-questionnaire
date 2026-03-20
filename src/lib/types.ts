@@ -112,6 +112,7 @@ export interface Executor {
   relationship: string;
   mobileNo: string;
   address: string;
+  remarks: string;
 }
 
 export interface Trustee {
@@ -122,6 +123,7 @@ export interface Trustee {
   relationship: string;
   mobileNo: string;
   address: string;
+  remarks: string;
 }
 
 export interface Guardian {
@@ -132,6 +134,7 @@ export interface Guardian {
   relationship: string;
   mobileNo: string;
   address: string;
+  remarks: string;
 }
 
 export interface SpecialConsiderations {
@@ -142,6 +145,7 @@ export interface SpecialConsiderations {
   hasSpecialNeedsDependents: string;
   specialNeedsDetails: string;
   wantTrustee: string;
+  additionalDetails: string;
 }
 
 export interface FormData {

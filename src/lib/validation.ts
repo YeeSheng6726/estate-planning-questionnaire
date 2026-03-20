@@ -129,6 +129,7 @@ export const executorSchema = z.object({
   relationship: z.string().optional(),
   mobileNo: z.string().optional(),
   address: z.string().optional(),
+  remarks: z.string().optional(),
 });
 
 export const trusteeSchema = z.object({
@@ -139,6 +140,7 @@ export const trusteeSchema = z.object({
   relationship: z.string().optional(),
   mobileNo: z.string().optional(),
   address: z.string().optional(),
+  remarks: z.string().optional(),
 });
 
 export const guardianSchema = z.object({
@@ -149,6 +151,7 @@ export const guardianSchema = z.object({
   relationship: z.string().optional(),
   mobileNo: z.string().optional(),
   address: z.string().optional(),
+  remarks: z.string().optional(),
 });
 
 export const specialConsiderationsSchema = z.object({
@@ -159,6 +162,7 @@ export const specialConsiderationsSchema = z.object({
   hasSpecialNeedsDependents: z.string(),
   specialNeedsDetails: z.string().optional(),
   wantTrustee: z.string(),
+  additionalDetails: z.string().optional(),
 });
 
 export const formDataSchema = z.object({

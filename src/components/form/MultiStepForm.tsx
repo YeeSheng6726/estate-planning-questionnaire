@@ -123,6 +123,7 @@ const defaultValues: FormData = {
     relationship: '',
     mobileNo: '',
     address: '',
+    remarks: '',
   },
   substituteExecutor: {
     appointmentType: 'spouse',
@@ -132,6 +133,7 @@ const defaultValues: FormData = {
     relationship: '',
     mobileNo: '',
     address: '',
+    remarks: '',
   },
   trustee: {
     appointmentType: 'spouse',
@@ -141,6 +143,7 @@ const defaultValues: FormData = {
     relationship: '',
     mobileNo: '',
     address: '',
+    remarks: '',
   },
   substituteTrustee: {
     appointmentType: 'spouse',
@@ -150,6 +153,7 @@ const defaultValues: FormData = {
     relationship: '',
     mobileNo: '',
     address: '',
+    remarks: '',
   },
   guardian: {
     appointmentType: 'spouse',
@@ -159,6 +163,7 @@ const defaultValues: FormData = {
     relationship: '',
     mobileNo: '',
     address: '',
+    remarks: '',
   },
   specialConsiderations: {
     educationFund: '',
@@ -168,6 +173,7 @@ const defaultValues: FormData = {
     hasSpecialNeedsDependents: '',
     specialNeedsDetails: '',
     wantTrustee: '',
+    additionalDetails: '',
   },
 };
 
@@ -313,9 +319,7 @@ export function MultiStepForm() {
               </div>
               <TrusteeSection
                 register={register}
-                errors={errors}
                 watch={watch}
-                setValue={setValue}
                 title="Primary Trustee"
                 titleCn="主要受托人"
                 subtitle="Trustee Details / 受托人详情"
@@ -324,9 +328,7 @@ export function MultiStepForm() {
               <div className="mt-6">
                 <TrusteeSection
                   register={register}
-                  errors={errors}
                   watch={watch}
-                  setValue={setValue}
                   title="Substitute Trustee"
                   titleCn="替代受托人"
                   subtitle="Substitute Trustee Details / 替代受托人详情"

@@ -3,6 +3,7 @@
 import { UseFormRegister, FieldErrors, UseFormSetValue, UseFormWatch } from 'react-hook-form';
 import { Input } from '@/components/ui/Input';
 import { RadioGroup } from '@/components/ui/RadioGroup';
+import { Textarea } from '@/components/ui/Textarea';
 import { FormData } from '@/lib/types';
 
 interface Props {
@@ -89,6 +90,14 @@ export function ExecutorSection({ register, errors, watch, title, titleCn, subti
               placeholder="Complete residential address"
               error={errors[prefix]?.address?.message}
               {...register(`${prefix}.address`)}
+            />
+
+            <Textarea
+              label="Remarks"
+              labelCn="备注"
+              placeholder="Additional details not mentioned above"
+              rows={3}
+              {...register(`${prefix}.remarks`)}
             />
           </div>
         </div>

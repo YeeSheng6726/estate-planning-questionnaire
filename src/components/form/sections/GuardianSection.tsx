@@ -3,6 +3,7 @@
 import { UseFormRegister, UseFormWatch } from 'react-hook-form';
 import { Input } from '@/components/ui/Input';
 import { RadioGroup } from '@/components/ui/RadioGroup';
+import { Textarea } from '@/components/ui/Textarea';
 import { FormData } from '@/lib/types';
 
 interface Props {
@@ -82,6 +83,14 @@ export function GuardianSection({ register, watch, title, titleCn, subtitle, pre
               labelCn="住宅地址"
               placeholder="Complete residential address"
               {...register(`${prefix}.address`)}
+            />
+
+            <Textarea
+              label="Remarks"
+              labelCn="备注"
+              placeholder="Additional details not mentioned above"
+              rows={3}
+              {...register(`${prefix}.remarks`)}
             />
           </div>
         </div>
