@@ -11,6 +11,7 @@ import { FormData } from '@/lib/types';
 import { formDataSchema } from '@/lib/validation';
 import { formSections, getSectionTitle } from './sections-config';
 import { ProgressBar } from './ProgressBar';
+import { ErrorBoundary } from './ErrorBoundary';
 import { Button } from '@/components/ui/Button';
 import {
   PersonalInfoSection,
@@ -79,11 +80,11 @@ const defaultValues: FormData = {
   numberOfChildren: 0,
   beneficiaries: [],
   financialDependent: {
-    hasDependents: 'false',
+    hasDependents: '',
     description: '',
   },
   beneficiaryProtection: {
-    hasExclusions: 'false',
+    hasExclusions: '',
     description: '',
   },
   realEstate: [],
@@ -167,9 +168,17 @@ export function MultiStepForm() {
     if (saved) {
       try {
         const parsed = JSON.parse(saved);
-        reset(parsed);
+        if (parsed && typeof parsed === 'object' && parsed.personalInfo) {
+          reset({
+            ...defaultValues,
+            ...parsed,
+            numberOfChildren: parsed.numberOfChildren ?? 0,
+            beneficiaries: Array.isArray(parsed.beneficiaries) ? parsed.beneficiaries : [],
+          });
+        }
       } catch {
         console.log('Could not restore saved form data');
+        localStorage.removeItem('estate-planning-form');
       }
     }
   }, [reset]);
@@ -334,7 +343,9 @@ export function MultiStepForm() {
                   </div>
 
                   <form onSubmit={handleSubmit(onSubmit)}>
-                    {renderSection()}
+                    <ErrorBoundary>
+                      {renderSection()}
+                    </ErrorBoundary>
 
                     <div className="flex justify-between items-center mt-8 pt-6 border-t border-gray-200">
                       <div className="flex items-center gap-2">

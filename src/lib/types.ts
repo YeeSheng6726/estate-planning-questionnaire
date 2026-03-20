@@ -39,12 +39,12 @@ export interface Beneficiary {
 }
 
 export interface FinancialDependent {
-  hasDependents: 'true' | 'false' | 'notApplicable' | boolean;
+  hasDependents: string;
   description: string;
 }
 
 export interface BeneficiaryProtection {
-  hasExclusions: 'true' | 'false' | 'notApplicable' | boolean;
+  hasExclusions: string;
   description: string;
 }
 

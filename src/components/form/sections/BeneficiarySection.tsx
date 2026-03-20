@@ -15,7 +15,8 @@ interface Props {
 }
 
 export function BeneficiarySection({ register, errors, setValue, watch }: Props) {
-  const beneficiaries = watch().beneficiaries || [];
+  const watchData = watch();
+  const beneficiaries: Beneficiary[] = Array.isArray(watchData?.beneficiaries) ? watchData.beneficiaries : [];
 
   const addBeneficiary = () => {
     const newBeneficiary: Beneficiary = {
@@ -28,12 +29,12 @@ export function BeneficiarySection({ register, errors, setValue, watch }: Props)
       address: '',
     };
     const updated = [...beneficiaries, newBeneficiary];
-    setValue('beneficiaries', updated);
+    setValue('beneficiaries', updated, { shouldValidate: false });
   };
 
   const removeBeneficiary = (index: number) => {
     const updated = beneficiaries.filter((_, i) => i !== index);
-    setValue('beneficiaries', updated);
+    setValue('beneficiaries', updated, { shouldValidate: false });
   };
 
   const relationshipOptions = [
@@ -60,97 +61,102 @@ export function BeneficiarySection({ register, errors, setValue, watch }: Props)
         </p>
       </div>
 
-        <div className="space-y-4">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <Input
-              label="No. of Children"
-              labelCn="孩子数目"
-              type="number"
-              min="0"
-              max="10"
-              placeholder="0"
-              {...register('numberOfChildren')}
-            />
-          </div>
+      <div className="space-y-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <Input
+            label="No. of Children"
+            labelCn="孩子数目"
+            type="number"
+            min="0"
+            max="10"
+            placeholder="0"
+            {...register('numberOfChildren')}
+          />
         </div>
-       
-       <div className="space-y-4">
-         {beneficiaries.length === 0 && (
-           <div className="text-center p-6 bg-gray-50 rounded-lg">
-             <p className="text-gray-500 mb-4">No beneficiaries added yet</p>
-           </div>
-         )}
+      </div>
 
-        {beneficiaries.map((beneficiary, index) => (
-          <div key={beneficiary.id || index} className="p-4 bg-gray-50 rounded-lg border border-gray-200">
-            <div className="flex justify-between items-center mb-4">
-              <h4 className="font-medium text-[#1e3a5f]">
-                Beneficiary {index + 1} / 受益人 {index + 1}
-              </h4>
-              {beneficiaries.length > 0 && (
-                <Button
-                  type="button"
-                  variant="outline"
-                  size="sm"
-                  onClick={() => removeBeneficiary(index)}
-                  className="text-red-500 border-red-300 hover:bg-red-50"
-                >
-                  <Trash2 size={16} />
-                </Button>
-              )}
-            </div>
-
-            <div className="space-y-4">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <Input
-                  label="Full Name"
-                  labelCn="姓名"
-                  placeholder="As per NRIC"
-                  {...register(`beneficiaries.${index}.fullName`)}
-                />
-
-                <div className="space-y-2">
-                  <Select
-                    label="Relationship"
-                    labelCn="关系"
-                    options={relationshipOptions}
-                    {...register(`beneficiaries.${index}.relationship`)}
-                  />
-                  {beneficiary.relationship === 'Other' && (
-                    <Input
-                      label="Please specify"
-                      labelCn="请注明"
-                      placeholder="Enter relationship"
-                      {...register(`beneficiaries.${index}.relationshipOther`)}
-                    />
-                  )}
-                </div>
-              </div>
-
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <Input
-                  label="NRIC No."
-                  labelCn="身份证号码"
-                  placeholder="e.g., 700101-01-1234"
-                  {...register(`beneficiaries.${index}.nric`)}
-                />
-
-                <Input
-                  label="Mobile No."
-                  labelCn="电话号码"
-                  type="tel"
-                  {...register(`beneficiaries.${index}.mobileNo`)}
-                />
-              </div>
-
-              <Input
-                label="Residential Address"
-                labelCn="住宅地址"
-                {...register(`beneficiaries.${index}.address`)}
-              />
-            </div>
+      <div className="space-y-4">
+        {beneficiaries.length === 0 && (
+          <div className="text-center p-6 bg-gray-50 rounded-lg">
+            <p className="text-gray-500 mb-4">No beneficiaries added yet</p>
           </div>
-        ))}
+        )}
+
+        {beneficiaries.map((beneficiary, index) => {
+          const relationshipKey = `beneficiaries.${index}.relationship` as const;
+          const currentRelationship = watchData?.beneficiaries?.[index]?.relationship;
+
+          return (
+            <div key={beneficiary.id || index} className="p-4 bg-gray-50 rounded-lg border border-gray-200">
+              <div className="flex justify-between items-center mb-4">
+                <h4 className="font-medium text-[#1e3a5f]">
+                  Beneficiary {index + 1} / 受益人 {index + 1}
+                </h4>
+                {beneficiaries.length > 0 && (
+                  <Button
+                    type="button"
+                    variant="outline"
+                    size="sm"
+                    onClick={() => removeBeneficiary(index)}
+                    className="text-red-500 border-red-300 hover:bg-red-50"
+                  >
+                    <Trash2 size={16} />
+                  </Button>
+                )}
+              </div>
+
+              <div className="space-y-4">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <Input
+                    label="Full Name"
+                    labelCn="姓名"
+                    placeholder="As per NRIC"
+                    {...register(`beneficiaries.${index}.fullName` as const)}
+                  />
+
+                  <div className="space-y-2">
+                    <Select
+                      label="Relationship"
+                      labelCn="关系"
+                      options={relationshipOptions}
+                      {...register(relationshipKey)}
+                    />
+                    {currentRelationship === 'Other' && (
+                      <Input
+                        label="Please specify"
+                        labelCn="请注明"
+                        placeholder="Enter relationship"
+                        {...register(`beneficiaries.${index}.relationshipOther` as const)}
+                      />
+                    )}
+                  </div>
+                </div>
+
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <Input
+                    label="NRIC No."
+                    labelCn="身份证号码"
+                    placeholder="e.g., 700101-01-1234"
+                    {...register(`beneficiaries.${index}.nric` as const)}
+                  />
+
+                  <Input
+                    label="Mobile No."
+                    labelCn="电话号码"
+                    type="tel"
+                    {...register(`beneficiaries.${index}.mobileNo` as const)}
+                  />
+                </div>
+
+                <Input
+                  label="Residential Address"
+                  labelCn="住宅地址"
+                  {...register(`beneficiaries.${index}.address` as const)}
+                />
+              </div>
+            </div>
+          );
+        })}
       </div>
 
       {beneficiaries.length < 10 && (

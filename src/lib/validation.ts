@@ -55,12 +55,12 @@ export const beneficiarySchema = z.object({
 });
 
 export const financialDependentSchema = z.object({
-  hasDependents: z.union([z.boolean(), z.literal('true'), z.literal('false'), z.literal('notApplicable')]).optional(),
+  hasDependents: z.string().optional(),
   description: z.string().optional(),
 });
 
 export const beneficiaryProtectionSchema = z.object({
-  hasExclusions: z.union([z.boolean(), z.literal('true'), z.literal('false'), z.literal('notApplicable')]).optional(),
+  hasExclusions: z.string().optional(),
   description: z.string().optional(),
 });
 
