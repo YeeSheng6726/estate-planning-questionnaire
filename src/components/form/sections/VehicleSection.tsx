@@ -16,18 +16,26 @@ interface Props {
 
 export function VehicleSection({ register, errors, setValue, watch }: Props) {
   const vehicles = watch().vehicles || [];
+  const allDistributedEqually = vehicles.length > 0 && vehicles.every(v => v.distributeEqually);
 
   const addVehicle = () => {
     const newVehicle: Vehicle = {
       id: Date.now().toString(),
       plateNumber: '',
-      distributeEqually: false,
+      distributeEqually: allDistributedEqually,
+      beneficiary: '',
+      substituteBeneficiary: '',
     };
     setValue('vehicles', [...vehicles, newVehicle]);
   };
 
   const removeVehicle = (index: number) => {
     const updated = vehicles.filter((_, i) => i !== index);
+    setValue('vehicles', updated);
+  };
+
+  const toggleAllDistributedEqually = (checked: boolean) => {
+    const updated = vehicles.map(v => ({ ...v, distributeEqually: checked }));
     setValue('vehicles', updated);
   };
 
@@ -47,21 +55,18 @@ export function VehicleSection({ register, errors, setValue, watch }: Props) {
       <Checkbox
         label="Tick if ALL vehicles to be sold and distributed equally"
         labelCn="若需出售所有车辆并平均分配，请勾选此项"
-        checked={vehicles.every(v => v.distributeEqually)}
-        onChange={(checked) => {
-          const updated = vehicles.map(v => ({ ...v, distributeEqually: checked }));
-          setValue('vehicles', updated);
-        }}
+        checked={allDistributedEqually}
+        onChange={toggleAllDistributedEqually}
       />
 
       <div className="space-y-4">
         {vehicles.map((vehicle, index) => (
-          <div key={index} className="p-4 bg-gray-50 rounded-lg border border-gray-200">
+          <div key={vehicle.id || index} className="p-4 bg-gray-50 rounded-lg border border-gray-200">
             <div className="flex justify-between items-center mb-4">
               <h4 className="font-medium text-[#1e3a5f]">
                 Vehicle {index + 1} / 车辆 {index + 1}
               </h4>
-              {vehicles.length > 1 && (
+              {vehicles.length > 0 && (
                 <Button
                   type="button"
                   variant="outline"
@@ -83,12 +88,34 @@ export function VehicleSection({ register, errors, setValue, watch }: Props) {
                 {...register(`vehicles.${index}.plateNumber`)}
               />
 
-              <Checkbox
-                label="Sell and distribute equally"
-                labelCn="出售并平均分配"
-                checked={vehicle.distributeEqually}
-                onChange={(checked) => setValue(`vehicles.${index}.distributeEqually`, checked)}
-              />
+              {!allDistributedEqually && (
+                <>
+                  <Checkbox
+                    label="Sell and distribute equally"
+                    labelCn="出售并平均分配"
+                    checked={vehicle.distributeEqually}
+                    onChange={(checked) => setValue(`vehicles.${index}.distributeEqually`, checked)}
+                  />
+
+                  {!vehicle.distributeEqually && (
+                    <>
+                      <Input
+                        label="Beneficiary Full Name"
+                        labelCn="受益人姓名"
+                        placeholder="Enter beneficiary name"
+                        {...register(`vehicles.${index}.beneficiary`)}
+                      />
+                      
+                      <Input
+                        label="Substitute Beneficiary"
+                        labelCn="代替受益人"
+                        placeholder="Enter substitute beneficiary"
+                        {...register(`vehicles.${index}.substituteBeneficiary`)}
+                      />
+                    </>
+                  )}
+                </>
+              )}
             </div>
           </div>
         ))}

@@ -73,6 +73,8 @@ export interface Vehicle {
   id: string;
   plateNumber: string;
   distributeEqually: boolean;
+  beneficiary: string;
+  substituteBeneficiary: string;
 }
 
 export interface Investments {

@@ -89,6 +89,8 @@ export const vehicleSchema = z.object({
   id: z.string(),
   plateNumber: z.string().min(1),
   distributeEqually: z.boolean(),
+  beneficiary: z.string().optional(),
+  substituteBeneficiary: z.string().optional(),
 });
 
 export const investmentsSchema = z.object({
