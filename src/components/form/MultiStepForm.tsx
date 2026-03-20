@@ -31,7 +31,7 @@ import {
 const defaultValues: FormData = {
   personalInfo: {
     fullName: '',
-    gender: 'male',
+    gender: '',
     genderOther: '',
     dateOfBirth: '',
     religion: '',
@@ -50,7 +50,7 @@ const defaultValues: FormData = {
   spouseInfo: {
     isApplicable: false,
     fullName: '',
-    gender: 'male',
+    gender: '',
     genderOther: '',
     dateOfBirth: '',
     religion: '',
@@ -67,15 +67,15 @@ const defaultValues: FormData = {
     employerName: '',
   },
   parentsTestator: {
-    fatherStatus: 'living',
+    fatherStatus: '',
     fatherName: '',
-    motherStatus: 'living',
+    motherStatus: '',
     motherName: '',
   },
   parentsSpouse: {
-    fatherStatus: 'living',
+    fatherStatus: '',
     fatherName: '',
-    motherStatus: 'living',
+    motherStatus: '',
     motherName: '',
   },
   noOfLegitimateChildren: 0,
@@ -116,7 +116,7 @@ const defaultValues: FormData = {
     otherObligations: '',
   },
   executor: {
-    appointmentType: 'spouse',
+    appointmentType: '',
     otherDetails: '',
     fullName: '',
     nric: '',
@@ -126,7 +126,7 @@ const defaultValues: FormData = {
     remarks: '',
   },
   substituteExecutor: {
-    appointmentType: 'spouse',
+    appointmentType: '',
     otherDetails: '',
     fullName: '',
     nric: '',
@@ -136,7 +136,7 @@ const defaultValues: FormData = {
     remarks: '',
   },
   trustee: {
-    appointmentType: 'spouse',
+    appointmentType: '',
     otherDetails: '',
     fullName: '',
     nric: '',
@@ -146,7 +146,7 @@ const defaultValues: FormData = {
     remarks: '',
   },
   substituteTrustee: {
-    appointmentType: 'spouse',
+    appointmentType: '',
     otherDetails: '',
     fullName: '',
     nric: '',
@@ -156,7 +156,7 @@ const defaultValues: FormData = {
     remarks: '',
   },
   guardian: {
-    appointmentType: 'spouse',
+    appointmentType: '',
     otherDetails: '',
     fullName: '',
     nric: '',

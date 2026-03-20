@@ -23,7 +23,7 @@ export function BankAccountSection({ register, setValue, watch }: Props) {
       const defaultAccount: BankAccount = {
         id: `${Date.now()}-default`,
         bankName: '',
-        distributeEqually: true,
+        distributeEqually: false,
         mainBeneficiaries: '',
         substituteBeneficiaries: '',
       };

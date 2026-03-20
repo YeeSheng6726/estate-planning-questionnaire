@@ -71,7 +71,7 @@ export const realEstateSchema = z.object({
   isNotApplicable: z.boolean(),
   propertyType: z.string().optional(),
   propertyTypeOther: z.string().optional(),
-  ownership: z.enum(['sole', 'joint']).optional(),
+  ownership: z.enum(['sole', 'joint']).or(z.literal('')).optional(),
   ownershipOther: z.string().optional(),
   address: z.string().optional(),
   mainBeneficiaries: z.string().optional(),

@@ -1,6 +1,6 @@
 export interface PersonalInfo {
   fullName: string;
-  gender: 'male' | 'female' | 'others';
+  gender: '' | 'male' | 'female' | 'others';
   genderOther: string;
   dateOfBirth: string;
   religion: string;
@@ -23,9 +23,9 @@ export interface SpouseInfo extends Omit<PersonalInfo, 'fullName'> {
 }
 
 export interface ParentInfo {
-  fatherStatus: 'living' | 'deceased' | 'notApplicable';
+  fatherStatus: '' | 'living' | 'deceased' | 'notApplicable';
   fatherName: string;
-  motherStatus: 'living' | 'deceased' | 'notApplicable';
+  motherStatus: '' | 'living' | 'deceased' | 'notApplicable';
   motherName: string;
 }
 
@@ -54,7 +54,7 @@ export interface RealEstate {
   isNotApplicable: boolean;
   propertyType: string;
   propertyTypeOther: string;
-  ownership: 'sole' | 'joint';
+  ownership: '' | 'sole' | 'joint';
   ownershipOther: string;
   address: string;
   mainBeneficiaries: string;
@@ -105,7 +105,7 @@ export interface BusinessAssets {
 }
 
 export interface Executor {
-  appointmentType: 'spouse' | 'adultChild' | 'professional' | 'other';
+  appointmentType: '' | 'spouse' | 'adultChild' | 'professional' | 'other';
   otherDetails: string;
   fullName: string;
   nric: string;
@@ -116,7 +116,7 @@ export interface Executor {
 }
 
 export interface Trustee {
-  appointmentType: 'spouse' | 'adultChild' | 'professional' | 'other';
+  appointmentType: '' | 'spouse' | 'adultChild' | 'professional' | 'other';
   otherDetails: string;
   fullName: string;
   nric: string;
@@ -127,7 +127,7 @@ export interface Trustee {
 }
 
 export interface Guardian {
-  appointmentType: 'spouse' | 'adultChild' | 'professional' | 'other';
+  appointmentType: '' | 'spouse' | 'adultChild' | 'professional' | 'other';
   otherDetails: string;
   fullName: string;
   nric: string;

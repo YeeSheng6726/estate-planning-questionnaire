@@ -23,7 +23,7 @@ export function VehicleSection({ register, setValue, watch }: Props) {
       const defaultVehicle: Vehicle = {
         id: `${Date.now()}-default`,
         plateNumber: '',
-        distributeEqually: true,
+        distributeEqually: false,
         beneficiary: '',
         substituteBeneficiary: '',
       };
