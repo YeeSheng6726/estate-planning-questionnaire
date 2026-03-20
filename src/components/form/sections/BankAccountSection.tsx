@@ -1,6 +1,6 @@
 'use client';
 
-import { useCallback } from 'react';
+import { useCallback, useEffect } from 'react';
 import { UseFormRegister, UseFormSetValue, UseFormWatch } from 'react-hook-form';
 import { Input } from '@/components/ui/Input';
 import { Checkbox } from '@/components/ui/Checkbox';
@@ -18,6 +18,19 @@ export function BankAccountSection({ register, setValue, watch }: Props) {
   const accounts: BankAccount[] = watch('bankAccounts') || [];
   const allDistributedEqually = accounts.length > 0 && accounts.every(a => a.distributeEqually);
 
+  useEffect(() => {
+    if (accounts.length === 0) {
+      const defaultAccount: BankAccount = {
+        id: `${Date.now()}-default`,
+        bankName: '',
+        distributeEqually: true,
+        mainBeneficiaries: '',
+        substituteBeneficiaries: '',
+      };
+      setValue('bankAccounts', [defaultAccount]);
+    }
+  }, []);
+
   const addAccount = useCallback(() => {
     const newAccount: BankAccount = {
       id: `${Date.now()}-${Math.random().toString(36).slice(2, 9)}`,
@@ -30,6 +43,7 @@ export function BankAccountSection({ register, setValue, watch }: Props) {
   }, [accounts, allDistributedEqually, setValue]);
 
   const removeAccount = useCallback((index: number) => {
+    if (accounts.length <= 1) return;
     const updated = accounts.filter((_, i) => i !== index);
     setValue('bankAccounts', updated);
   }, [accounts, setValue]);
@@ -66,7 +80,7 @@ export function BankAccountSection({ register, setValue, watch }: Props) {
               <h4 className="font-medium text-[#1e3a5f]">
                 Bank Account {index + 1} / 银行户口 {index + 1}
               </h4>
-              {accounts.length > 0 && (
+              {accounts.length > 1 && (
                 <Button
                   type="button"
                   variant="outline"
@@ -130,16 +144,6 @@ export function BankAccountSection({ register, setValue, watch }: Props) {
           <Plus size={16} className="mr-2" />
           Add Bank Account / 添加银行户口
         </Button>
-      )}
-
-      {accounts.length === 0 && (
-        <div className="text-center p-8 bg-gray-50 rounded-lg">
-          <p className="text-gray-500 mb-4">No bank accounts added yet</p>
-          <Button type="button" variant="secondary" onClick={addAccount}>
-            <Plus size={16} className="mr-2" />
-            Add Your First Bank Account
-          </Button>
-        </div>
       )}
     </div>
   );

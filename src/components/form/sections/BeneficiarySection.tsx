@@ -1,6 +1,6 @@
 'use client';
 
-import { useCallback } from 'react';
+import { useCallback, useEffect } from 'react';
 import { UseFormRegister, UseFormSetValue, UseFormWatch } from 'react-hook-form';
 import { Input } from '@/components/ui/Input';
 import { Select } from '@/components/ui/Select';
@@ -17,6 +17,21 @@ interface Props {
 export function BeneficiarySection({ register, setValue, watch }: Props) {
   const beneficiaries: Beneficiary[] = watch('beneficiaries') || [];
 
+  useEffect(() => {
+    if (beneficiaries.length === 0) {
+      const defaultBeneficiary: Beneficiary = {
+        id: `${Date.now()}-default`,
+        fullName: '',
+        relationship: '',
+        relationshipOther: '',
+        nric: '',
+        mobileNo: '',
+        address: '',
+      };
+      setValue('beneficiaries', [defaultBeneficiary], { shouldValidate: false });
+    }
+  }, []);
+
   const addBeneficiary = useCallback(() => {
     const newBeneficiary: Beneficiary = {
       id: `${Date.now()}-${Math.random().toString(36).slice(2, 9)}`,
@@ -32,6 +47,7 @@ export function BeneficiarySection({ register, setValue, watch }: Props) {
   }, [beneficiaries, setValue]);
 
   const removeBeneficiary = useCallback((index: number) => {
+    if (beneficiaries.length <= 1) return;
     const updated = beneficiaries.filter((_, i) => i !== index);
     setValue('beneficiaries', updated, { shouldValidate: false });
   }, [beneficiaries, setValue]);
@@ -47,6 +63,20 @@ export function BeneficiarySection({ register, setValue, watch }: Props) {
     { value: 'Other', label: 'Other', labelCn: '其它' },
   ];
 
+  const childCountOptions = [
+    { value: '0', label: '0' },
+    { value: '1', label: '1' },
+    { value: '2', label: '2' },
+    { value: '3', label: '3' },
+    { value: '4', label: '4' },
+    { value: '5', label: '5' },
+    { value: '6', label: '6' },
+    { value: '7', label: '7' },
+    { value: '8', label: '8' },
+    { value: '9', label: '9' },
+    { value: '10', label: '10' },
+  ];
+
   return (
     <div className="space-y-6">
       <div className="bg-gradient-to-r from-[#1e3a5f]/5 to-[#c9a962]/5 p-4 rounded-lg mb-6">
@@ -60,13 +90,16 @@ export function BeneficiarySection({ register, setValue, watch }: Props) {
         </p>
       </div>
 
-      <div className="space-y-4">
-        {beneficiaries.length === 0 && (
-          <div className="text-center p-6 bg-gray-50 rounded-lg">
-            <p className="text-gray-500 mb-4">No beneficiaries added yet</p>
-          </div>
-        )}
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <Select
+          label="Number of Children"
+          labelCn="子女数量"
+          options={childCountOptions}
+          {...register('numberOfChildren')}
+        />
+      </div>
 
+      <div className="space-y-4">
         {beneficiaries.map((beneficiary, index) => {
           const relationshipKey = `beneficiaries.${index}.relationship` as const;
           const currentRelationship = beneficiary.relationship;
@@ -77,7 +110,7 @@ export function BeneficiarySection({ register, setValue, watch }: Props) {
                 <h4 className="font-medium text-[#1e3a5f]">
                   Beneficiary {index + 1} / 受益人 {index + 1}
                 </h4>
-                {beneficiaries.length > 0 && (
+                {beneficiaries.length > 1 && (
                   <Button
                     type="button"
                     variant="outline"

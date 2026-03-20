@@ -67,6 +67,28 @@ export function InvestmentsSection({ register, errors, watch }: Props) {
           placeholder="Provider and account details"
           {...register('investments.prs')}
         />
+
+        <div className="space-y-4 p-4 bg-gray-50 rounded-lg">
+          <h5 className="font-medium text-[#1e3a5f] text-sm">PRS Nomination / PRS指定受益人</h5>
+          <Input
+            label="Main Beneficiary"
+            labelCn="主要受益人"
+            placeholder="Name of beneficiary"
+            {...register('investments.prsMainBeneficiary')}
+          />
+          <Input
+            label="Substitute Beneficiary"
+            labelCn="替代受益人"
+            placeholder="Name of substitute beneficiary"
+            {...register('investments.prsSubBeneficiary')}
+          />
+          <Input
+            label="Distribution"
+            labelCn="分配额"
+            placeholder="e.g., John 50%, Mary 50%"
+            {...register('investments.prsDistribution')}
+          />
+        </div>
       </div>
 
       <div className="border-t border-gray-200 pt-6 space-y-4">

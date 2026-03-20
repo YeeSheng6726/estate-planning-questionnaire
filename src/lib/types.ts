@@ -83,6 +83,9 @@ export interface Investments {
   unitTrust: string;
   sspn: string;
   prs: string;
+  prsMainBeneficiary: string;
+  prsSubBeneficiary: string;
+  prsDistribution: string;
   insuranceNominationCompleted: string;
   insuranceBeneficiary: string;
   insuranceSubBeneficiary: string;
@@ -114,13 +117,13 @@ export interface Executor {
 }
 
 export interface SpecialConsiderations {
-  educationFund: boolean;
+  educationFund: string;
   childrenInheritanceAge: string;
-  parentsNeedSupport: boolean;
+  parentsNeedSupport: string;
   parentsSupportDetails: string;
-  hasSpecialNeedsDependents: boolean;
+  hasSpecialNeedsDependents: string;
   specialNeedsDetails: string;
-  wantTrustee: boolean;
+  wantTrustee: string;
 }
 
 export interface FormData {
@@ -128,6 +131,7 @@ export interface FormData {
   spouseInfo: SpouseInfo;
   parentsTestator: ParentInfo;
   parentsSpouse: ParentInfo;
+  numberOfChildren: number;
   beneficiaries: Beneficiary[];
   financialDependent: FinancialDependent;
   beneficiaryProtection: BeneficiaryProtection;

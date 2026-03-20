@@ -1,6 +1,6 @@
 'use client';
 
-import { useCallback } from 'react';
+import { useCallback, useEffect } from 'react';
 import { UseFormRegister, UseFormSetValue, UseFormWatch } from 'react-hook-form';
 import { Input } from '@/components/ui/Input';
 import { Select } from '@/components/ui/Select';
@@ -20,6 +20,24 @@ export function RealEstateSection({ register, setValue, watch }: Props) {
   const properties: RealEstate[] = watch('realEstate') || [];
   const allNotApplicable = properties.length > 0 && properties.every(p => p.isNotApplicable);
 
+  useEffect(() => {
+    if (properties.length === 0) {
+      const defaultProperty: RealEstate = {
+        id: `${Date.now()}-default`,
+        isNotApplicable: false,
+        propertyType: '',
+        propertyTypeOther: '',
+        ownership: 'sole',
+        ownershipOther: '',
+        address: '',
+        mainBeneficiaries: '',
+        substituteBeneficiaries: '',
+        hasMortgageInsurance: false,
+      };
+      setValue('realEstate', [defaultProperty]);
+    }
+  }, []);
+
   const addProperty = useCallback(() => {
     const newProperty: RealEstate = {
       id: `${Date.now()}-${Math.random().toString(36).slice(2, 9)}`,
@@ -37,6 +55,7 @@ export function RealEstateSection({ register, setValue, watch }: Props) {
   }, [properties, setValue]);
 
   const removeProperty = useCallback((index: number) => {
+    if (properties.length <= 1) return;
     const updated = properties.filter((_, i) => i !== index);
     setValue('realEstate', updated);
   }, [properties, setValue]);
@@ -84,7 +103,7 @@ export function RealEstateSection({ register, setValue, watch }: Props) {
               <h4 className="font-medium text-[#1e3a5f]">
                 Property {index + 1} / 房产 {index + 1}
               </h4>
-              {properties.length > 0 && (
+              {properties.length > 1 && (
                 <Button
                   type="button"
                   variant="outline"

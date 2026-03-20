@@ -74,6 +74,7 @@ const defaultValues: FormData = {
     motherStatus: 'living',
     motherName: '',
   },
+  numberOfChildren: 0,
   beneficiaries: [],
   financialDependent: {
     hasDependents: '',
@@ -92,6 +93,9 @@ const defaultValues: FormData = {
     unitTrust: '',
     sspn: '',
     prs: '',
+    prsMainBeneficiary: '',
+    prsSubBeneficiary: '',
+    prsDistribution: '',
     insuranceNominationCompleted: '',
     insuranceBeneficiary: '',
     insuranceSubBeneficiary: '',
@@ -129,13 +133,13 @@ const defaultValues: FormData = {
     address: '',
   },
   specialConsiderations: {
-    educationFund: false,
+    educationFund: '',
     childrenInheritanceAge: '',
-    parentsNeedSupport: false,
+    parentsNeedSupport: '',
     parentsSupportDetails: '',
-    hasSpecialNeedsDependents: false,
+    hasSpecialNeedsDependents: '',
     specialNeedsDetails: '',
-    wantTrustee: false,
+    wantTrustee: '',
   },
 };
 

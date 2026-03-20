@@ -2,7 +2,7 @@
 
 import { UseFormRegister, UseFormSetValue, UseFormWatch } from 'react-hook-form';
 import { Input } from '@/components/ui/Input';
-import { Checkbox } from '@/components/ui/Checkbox';
+import { RadioGroup } from '@/components/ui/RadioGroup';
 import { Textarea } from '@/components/ui/Textarea';
 import { FormData } from '@/lib/types';
 
@@ -12,7 +12,7 @@ interface Props {
   watch: UseFormWatch<FormData>;
 }
 
-export function SpecialConsiderationsSection({ register, setValue, watch }: Props) {
+export function SpecialConsiderationsSection({ register, watch }: Props) {
   const data = watch('specialConsiderations');
 
   return (
@@ -30,14 +30,18 @@ export function SpecialConsiderationsSection({ register, setValue, watch }: Prop
 
       <div className="space-y-4">
         <div className="p-4 bg-gray-50 rounded-lg">
-          <Checkbox
+          <RadioGroup
             label="Are you considering establishing an education fund?"
             labelCn="您是否考虑设立教育基金？"
-            checked={data.educationFund}
-            onChange={(checked) => setValue('specialConsiderations.educationFund', checked)}
+            horizontal
+            options={[
+              { value: 'true', label: 'Yes', labelCn: '是' },
+              { value: 'false', label: 'Not Applicable', labelCn: '不适用' },
+            ]}
+            {...register('specialConsiderations.educationFund')}
           />
 
-          {data.educationFund && (
+          {data?.educationFund === 'true' && (
             <div className="mt-4">
               <Input
                 label="At what age would you like your children to receive their inheritance?"
@@ -50,14 +54,18 @@ export function SpecialConsiderationsSection({ register, setValue, watch }: Prop
         </div>
 
         <div className="p-4 bg-gray-50 rounded-lg">
-          <Checkbox
+          <RadioGroup
             label="Do your parents require your ongoing financial support?"
             labelCn="您的父母是否需要您的持续财务支持？"
-            checked={data.parentsNeedSupport}
-            onChange={(checked) => setValue('specialConsiderations.parentsNeedSupport', checked)}
+            horizontal
+            options={[
+              { value: 'true', label: 'Yes', labelCn: '是' },
+              { value: 'false', label: 'Not Applicable', labelCn: '不适用' },
+            ]}
+            {...register('specialConsiderations.parentsNeedSupport')}
           />
 
-          {data.parentsNeedSupport && (
+          {data?.parentsNeedSupport === 'true' && (
             <div className="mt-4">
               <Textarea
                 label="Please provide brief details"
@@ -71,14 +79,18 @@ export function SpecialConsiderationsSection({ register, setValue, watch }: Prop
         </div>
 
         <div className="p-4 bg-gray-50 rounded-lg">
-          <Checkbox
+          <RadioGroup
             label="Do you have dependents with disabilities or special needs?"
             labelCn="您是否有残障或特殊需求的受抚养人？"
-            checked={data.hasSpecialNeedsDependents}
-            onChange={(checked) => setValue('specialConsiderations.hasSpecialNeedsDependents', checked)}
+            horizontal
+            options={[
+              { value: 'true', label: 'Yes', labelCn: '是' },
+              { value: 'false', label: 'Not Applicable', labelCn: '不适用' },
+            ]}
+            {...register('specialConsiderations.hasSpecialNeedsDependents')}
           />
 
-          {data.hasSpecialNeedsDependents && (
+          {data?.hasSpecialNeedsDependents === 'true' && (
             <div className="mt-4">
               <Textarea
                 label="Please provide brief details"
@@ -92,11 +104,15 @@ export function SpecialConsiderationsSection({ register, setValue, watch }: Prop
         </div>
 
         <div className="p-4 bg-gray-50 rounded-lg">
-          <Checkbox
+          <RadioGroup
             label="Would you like to set up a trust (Trustee) for your beneficiaries?"
             labelCn="您是否希望为受益人设立信托（受托人）？"
-            checked={data.wantTrustee}
-            onChange={(checked) => setValue('specialConsiderations.wantTrustee', checked)}
+            horizontal
+            options={[
+              { value: 'true', label: 'Yes', labelCn: '是' },
+              { value: 'false', label: 'Not Applicable', labelCn: '不适用' },
+            ]}
+            {...register('specialConsiderations.wantTrustee')}
           />
         </div>
       </div>

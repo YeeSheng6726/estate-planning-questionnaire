@@ -1,6 +1,6 @@
 'use client';
 
-import { useCallback } from 'react';
+import { useCallback, useEffect } from 'react';
 import { UseFormRegister, UseFormSetValue, UseFormWatch } from 'react-hook-form';
 import { Input } from '@/components/ui/Input';
 import { Checkbox } from '@/components/ui/Checkbox';
@@ -18,6 +18,19 @@ export function VehicleSection({ register, setValue, watch }: Props) {
   const vehicles: Vehicle[] = watch('vehicles') || [];
   const allDistributedEqually = vehicles.length > 0 && vehicles.every(v => v.distributeEqually);
 
+  useEffect(() => {
+    if (vehicles.length === 0) {
+      const defaultVehicle: Vehicle = {
+        id: `${Date.now()}-default`,
+        plateNumber: '',
+        distributeEqually: true,
+        beneficiary: '',
+        substituteBeneficiary: '',
+      };
+      setValue('vehicles', [defaultVehicle]);
+    }
+  }, []);
+
   const addVehicle = useCallback(() => {
     const newVehicle: Vehicle = {
       id: `${Date.now()}-${Math.random().toString(36).slice(2, 9)}`,
@@ -30,6 +43,7 @@ export function VehicleSection({ register, setValue, watch }: Props) {
   }, [vehicles, allDistributedEqually, setValue]);
 
   const removeVehicle = useCallback((index: number) => {
+    if (vehicles.length <= 1) return;
     const updated = vehicles.filter((_, i) => i !== index);
     setValue('vehicles', updated);
   }, [vehicles, setValue]);
@@ -66,7 +80,7 @@ export function VehicleSection({ register, setValue, watch }: Props) {
               <h4 className="font-medium text-[#1e3a5f]">
                 Vehicle {index + 1} / 车辆 {index + 1}
               </h4>
-              {vehicles.length > 0 && (
+              {vehicles.length > 1 && (
                 <Button
                   type="button"
                   variant="outline"
@@ -130,16 +144,6 @@ export function VehicleSection({ register, setValue, watch }: Props) {
           <Plus size={16} className="mr-2" />
           Add Vehicle / 添加车辆
         </Button>
-      )}
-
-      {vehicles.length === 0 && (
-        <div className="text-center p-8 bg-gray-50 rounded-lg">
-          <p className="text-gray-500 mb-4">No vehicles added yet</p>
-          <Button type="button" variant="secondary" onClick={addVehicle}>
-            <Plus size={16} className="mr-2" />
-            Add Your First Vehicle
-          </Button>
-        </div>
       )}
     </div>
   );

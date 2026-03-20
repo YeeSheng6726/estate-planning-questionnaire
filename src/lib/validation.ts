@@ -99,6 +99,9 @@ export const investmentsSchema = z.object({
   unitTrust: z.string().optional(),
   sspn: z.string().optional(),
   prs: z.string().optional(),
+  prsMainBeneficiary: z.string().optional(),
+  prsSubBeneficiary: z.string().optional(),
+  prsDistribution: z.string().optional(),
   insuranceNominationCompleted: z.string().min(1),
   insuranceBeneficiary: z.string().optional(),
   insuranceSubBeneficiary: z.string().optional(),
@@ -130,13 +133,13 @@ export const executorSchema = z.object({
 });
 
 export const specialConsiderationsSchema = z.object({
-  educationFund: z.boolean(),
+  educationFund: z.string(),
   childrenInheritanceAge: z.string().optional(),
-  parentsNeedSupport: z.boolean(),
+  parentsNeedSupport: z.string(),
   parentsSupportDetails: z.string().optional(),
-  hasSpecialNeedsDependents: z.boolean(),
+  hasSpecialNeedsDependents: z.string(),
   specialNeedsDetails: z.string().optional(),
-  wantTrustee: z.boolean(),
+  wantTrustee: z.string(),
 });
 
 export const formDataSchema = z.object({
@@ -144,6 +147,7 @@ export const formDataSchema = z.object({
   spouseInfo: spouseInfoSchema,
   parentsTestator: parentInfoSchema,
   parentsSpouse: parentInfoSchema,
+  numberOfChildren: z.number(),
   beneficiaries: z.array(beneficiarySchema),
   financialDependent: financialDependentSchema,
   beneficiaryProtection: beneficiaryProtectionSchema,
