@@ -86,20 +86,16 @@ export interface Investments {
   prsMainBeneficiary: string;
   prsSubBeneficiary: string;
   prsDistribution: string;
+  prsRemarks: string;
   insuranceNominationCompleted: string;
-  insuranceBeneficiary: string;
-  insuranceSubBeneficiary: string;
   insuranceRemarks: string;
   epfNominationCompleted: string;
-  epfBeneficiary: string;
-  epfSubBeneficiary: string;
   epfRemarks: string;
 }
 
 export interface BusinessAssets {
-  hasBusiness: boolean;
+  hasBusiness: string;
   businessDescription: string;
-  hasSuccessionPlan: boolean;
   collectibles: string;
   digitalAssets: string;
   guarantees: string;

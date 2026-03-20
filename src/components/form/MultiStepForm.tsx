@@ -96,19 +96,15 @@ const defaultValues: FormData = {
     prsMainBeneficiary: '',
     prsSubBeneficiary: '',
     prsDistribution: '',
+    prsRemarks: '',
     insuranceNominationCompleted: '',
-    insuranceBeneficiary: '',
-    insuranceSubBeneficiary: '',
     insuranceRemarks: '',
     epfNominationCompleted: '',
-    epfBeneficiary: '',
-    epfSubBeneficiary: '',
     epfRemarks: '',
   },
   businessAssets: {
-    hasBusiness: false,
+    hasBusiness: '',
     businessDescription: '',
-    hasSuccessionPlan: false,
     collectibles: '',
     digitalAssets: '',
     guarantees: '',
@@ -251,7 +247,7 @@ export function MultiStepForm() {
       case 10:
         return <InvestmentsSection register={register} errors={errors} watch={watch} />;
       case 11:
-        return <BusinessAssetsSection register={register} watch={watch} setValue={setValue} />;
+        return <BusinessAssetsSection register={register} watch={watch} />;
       case 12:
         return (
           <div className="space-y-8">

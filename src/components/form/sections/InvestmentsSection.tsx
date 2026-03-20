@@ -15,9 +15,6 @@ interface Props {
 export function InvestmentsSection({ register, errors, watch }: Props) {
   const investments = watch('investments');
 
-  const insuranceCompleted = investments?.insuranceNominationCompleted;
-  const epfCompleted = investments?.epfNominationCompleted;
-
   return (
     <div className="space-y-6">
       <div className="bg-gradient-to-r from-[#1e3a5f]/5 to-[#c9a962]/5 p-4 rounded-lg mb-6">
@@ -69,7 +66,7 @@ export function InvestmentsSection({ register, errors, watch }: Props) {
         />
 
         <div className="space-y-4 p-4 bg-gray-50 rounded-lg">
-          <h5 className="font-medium text-[#1e3a5f] text-sm">PRS Nomination / PRS指定受益人</h5>
+          <h5 className="font-medium text-[#1e3a5f] text-sm">Beneficiary for All Investment / 所有投资的指定受益人</h5>
           <Input
             label="Main Beneficiary"
             labelCn="主要受益人"
@@ -87,6 +84,13 @@ export function InvestmentsSection({ register, errors, watch }: Props) {
             labelCn="分配额"
             placeholder="e.g., John 50%, Mary 50%"
             {...register('investments.prsDistribution')}
+          />
+          <Textarea
+            label="Remarks"
+            labelCn="备注"
+            placeholder="Additional details"
+            rows={2}
+            {...register('investments.prsRemarks')}
           />
         </div>
       </div>
@@ -106,23 +110,6 @@ export function InvestmentsSection({ register, errors, watch }: Props) {
           error={errors.investments?.insuranceNominationCompleted?.message}
           {...register('investments.insuranceNominationCompleted')}
         />
-
-        {insuranceCompleted && insuranceCompleted !== 'Not Applicable' && (
-          <div className="space-y-4 p-4 bg-gray-50 rounded-lg">
-            <Input
-              label="Beneficiary"
-              labelCn="指定受益人"
-              placeholder="Name of beneficiary"
-              {...register('investments.insuranceBeneficiary')}
-            />
-            <Input
-              label="Substitute Beneficiary"
-              labelCn="替代受益人"
-              placeholder="Name of substitute beneficiary"
-              {...register('investments.insuranceSubBeneficiary')}
-            />
-          </div>
-        )}
 
         <Textarea
           label="Remarks - Insurance Policies"
@@ -148,23 +135,6 @@ export function InvestmentsSection({ register, errors, watch }: Props) {
           error={errors.investments?.epfNominationCompleted?.message}
           {...register('investments.epfNominationCompleted')}
         />
-
-        {epfCompleted && epfCompleted !== 'Not Applicable' && (
-          <div className="space-y-4 p-4 bg-gray-50 rounded-lg">
-            <Input
-              label="Beneficiary"
-              labelCn="指定受益人"
-              placeholder="Name of beneficiary"
-              {...register('investments.epfBeneficiary')}
-            />
-            <Input
-              label="Substitute Beneficiary"
-              labelCn="替代受益人"
-              placeholder="Name of substitute beneficiary"
-              {...register('investments.epfSubBeneficiary')}
-            />
-          </div>
-        )}
 
         <Textarea
           label="Remarks - EPF"

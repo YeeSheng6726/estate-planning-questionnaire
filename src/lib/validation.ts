@@ -102,20 +102,16 @@ export const investmentsSchema = z.object({
   prsMainBeneficiary: z.string().optional(),
   prsSubBeneficiary: z.string().optional(),
   prsDistribution: z.string().optional(),
+  prsRemarks: z.string().optional(),
   insuranceNominationCompleted: z.string().min(1),
-  insuranceBeneficiary: z.string().optional(),
-  insuranceSubBeneficiary: z.string().optional(),
   insuranceRemarks: z.string().optional(),
   epfNominationCompleted: z.string().min(1),
-  epfBeneficiary: z.string().optional(),
-  epfSubBeneficiary: z.string().optional(),
   epfRemarks: z.string().optional(),
 });
 
 export const businessAssetsSchema = z.object({
-  hasBusiness: z.boolean(),
+  hasBusiness: z.string(),
   businessDescription: z.string().optional(),
-  hasSuccessionPlan: z.boolean().optional(),
   collectibles: z.string().optional(),
   digitalAssets: z.string().optional(),
   guarantees: z.string().optional(),
