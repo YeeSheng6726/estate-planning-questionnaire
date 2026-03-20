@@ -70,7 +70,7 @@ export function BeneficiarySection({ register, errors, setValue, watch }: Props)
             min="0"
             max="10"
             placeholder="0"
-            {...register('numberOfChildren')}
+            {...register('numberOfChildren', { valueAsNumber: true })}
           />
         </div>
       </div>
