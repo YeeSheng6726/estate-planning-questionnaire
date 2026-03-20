@@ -2,8 +2,14 @@ import { NextRequest, NextResponse } from 'next/server';
 
 const N8N_WEBHOOK_URL = process.env.N8N_WEBHOOK_URL || 'https://ys286.zeabur.app/webhook/45984f7b-5b79-4bff-b17c-1f770060cb2c';
 
+function generateSubmissionId(): string {
+  const timestamp = Date.now().toString(36).toUpperCase();
+  const randomPart = Math.random().toString(36).substring(2, 8).toUpperCase();
+  return `EP-${timestamp}-${randomPart}`;
+}
+
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-function transformFormData(data: any) {
+function transformFormData(data: any, submissionId: string, submittedAt: string) {
   const genderLabels: Record<string, string> = {
     male: 'Male / 男性',
     female: 'Female / 女性',
@@ -236,7 +242,8 @@ function transformFormData(data: any) {
 
     // Submission Info
     "Submission Info / 提交信息": {
-      "Submitted At / 提交时间": data.submittedAt || new Date().toISOString()
+      "Submission ID / 提交编号": submissionId,
+      "Submitted At / 提交时间": submittedAt
     }
   };
 }
@@ -244,11 +251,13 @@ function transformFormData(data: any) {
 export async function POST(request: NextRequest) {
   try {
     const data = await request.json();
+    const submissionId = generateSubmissionId();
+    const submittedAt = new Date().toISOString();
 
     const controller = new AbortController();
     const timeoutId = setTimeout(() => controller.abort(), 30000);
 
-    const transformedData = transformFormData(data);
+    const transformedData = transformFormData(data, submissionId, submittedAt);
 
     const response = await fetch(N8N_WEBHOOK_URL, {
       method: 'POST',
