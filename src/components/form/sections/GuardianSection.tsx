@@ -1,14 +1,12 @@
 'use client';
 
-import { UseFormRegister, FieldErrors, UseFormSetValue, UseFormWatch } from 'react-hook-form';
+import { UseFormRegister, UseFormWatch } from 'react-hook-form';
 import { Input } from '@/components/ui/Input';
 import { RadioGroup } from '@/components/ui/RadioGroup';
 import { FormData } from '@/lib/types';
 
 interface Props {
   register: UseFormRegister<FormData>;
-  errors: FieldErrors<FormData>;
-  setValue: UseFormSetValue<FormData>;
   watch: UseFormWatch<FormData>;
   title: string;
   titleCn: string;
@@ -16,8 +14,9 @@ interface Props {
   prefix: 'guardian';
 }
 
-export function GuardianSection({ register, errors, watch, title, titleCn, subtitle, prefix }: Props) {
+export function GuardianSection({ register, watch, title, titleCn, subtitle, prefix }: Props) {
   const guardianData = watch(prefix);
+  const showDetails = guardianData?.appointmentType && guardianData.appointmentType !== 'spouse';
 
   return (
     <div className="space-y-6">
@@ -40,19 +39,19 @@ export function GuardianSection({ register, errors, watch, title, titleCn, subti
         {...register(`${prefix}.appointmentType`)}
       />
 
-      {guardianData?.appointmentType === 'other' && (
-        <Input
-          label="Please provide details"
-          labelCn="若选择其他，请提供资料"
-          placeholder="e.g., Friend, relative, etc."
-          {...register(`${prefix}.otherDetails`)}
-        />
-      )}
-
-      {guardianData?.appointmentType !== 'spouse' && (
+      {showDetails && (
         <div className="border-t border-gray-200 pt-6 mt-6">
           <h4 className="font-medium text-[#1e3a5f] mb-4">{subtitle}</h4>
           
+          {guardianData?.appointmentType === 'other' && (
+            <Input
+              label="Please provide details"
+              labelCn="若选择其他，请提供资料"
+              placeholder="e.g., Friend, relative, etc."
+              {...register(`${prefix}.otherDetails`)}
+            />
+          )}
+
           <div className="space-y-4">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <Input

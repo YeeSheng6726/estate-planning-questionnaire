@@ -149,6 +149,7 @@ function transformFormData(data: any) {
       "Unit Trust / Mutual Funds / 单位信托/共同基金": data.investments?.unitTrust || '',
       "SSPN / 国民教育储蓄基金": data.investments?.sspn || '',
       "PRS / 私人退休基金": data.investments?.prs || '',
+      "PRS Nomination Completed / 私人退休基金指定受益人已完成": data.investments?.prsNominationCompleted || '',
       "All Investment - Main Beneficiary / 所有投资 - 主要受益人": data.investments?.prsMainBeneficiary || '',
       "All Investment - Substitute Beneficiary / 所有投资 - 代替受益人": data.investments?.prsSubBeneficiary || '',
       "All Investment - Distribution / 所有投资 - 分配额": data.investments?.prsDistribution || '',

@@ -84,6 +84,7 @@ export interface Investments {
   unitTrust: string;
   sspn: string;
   prs: string;
+  prsNominationCompleted: string;
   prsMainBeneficiary: string;
   prsSubBeneficiary: string;
   prsDistribution: string;

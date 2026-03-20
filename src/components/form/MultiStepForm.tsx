@@ -97,6 +97,7 @@ const defaultValues: FormData = {
     unitTrust: '',
     sspn: '',
     prs: '',
+    prsNominationCompleted: '',
     prsMainBeneficiary: '',
     prsSubBeneficiary: '',
     prsDistribution: '',
@@ -342,9 +343,7 @@ export function MultiStepForm() {
                 </div>
                 <GuardianSection
                   register={register}
-                  errors={errors}
                   watch={watch}
-                  setValue={setValue}
                   title="Guardian"
                   titleCn="监护人"
                   subtitle="Guardian Details / 监护人详情"

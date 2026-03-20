@@ -65,6 +65,18 @@ export function InvestmentsSection({ register, errors, watch }: Props) {
           {...register('investments.prs')}
         />
 
+        <Select
+          label="Has the PRS nomination been completed?"
+          labelCn="私人退休基金的指定受益人选已完成了吗？"
+          options={[
+            { value: 'Completed', label: 'Completed', labelCn: '已完成' },
+            { value: 'Not Completed', label: 'Not Completed', labelCn: '未完成' },
+            { value: 'Not Sure', label: 'Not Sure', labelCn: '不确定' },
+            { value: 'Not Applicable', label: 'Not Applicable', labelCn: '不适用' },
+          ]}
+          {...register('investments.prsNominationCompleted')}
+        />
+
         <div className="space-y-4 p-4 bg-gray-50 rounded-lg">
           <h5 className="font-medium text-[#1e3a5f] text-sm">Beneficiary for All Investment / 所有投资的指定受益人</h5>
           <Input

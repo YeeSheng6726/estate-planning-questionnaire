@@ -101,6 +101,7 @@ export const investmentsSchema = z.object({
   unitTrust: z.string().optional(),
   sspn: z.string().optional(),
   prs: z.string().optional(),
+  prsNominationCompleted: z.string().optional(),
   prsMainBeneficiary: z.string().optional(),
   prsSubBeneficiary: z.string().optional(),
   prsDistribution: z.string().optional(),
