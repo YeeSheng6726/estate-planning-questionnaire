@@ -24,10 +24,10 @@ export default function ThankYouPage() {
 
           <Link
             href="/form"
-            className="flex items-center justify-center gap-2 w-full px-6 py-3 bg-[#1e3a5f] text-white rounded-lg hover:bg-[#2d4a6f] transition-colors"
+            className="flex flex-col items-center justify-center gap-1 w-full px-6 py-3 bg-[#1e3a5f] text-white rounded-lg hover:bg-[#2d4a6f] transition-colors"
           >
-            <Home size={18} />
-            Submit Another Response / 提交另一份问卷
+            <span className="text-sm font-medium">Submit Another Response</span>
+            <span className="text-xs opacity-90">提交另一份问卷</span>
           </Link>
         </div>
 
