@@ -178,18 +178,13 @@ export function MultiStepForm() {
   const onSubmit = async (data: FormData) => {
     setIsSubmitting(true);
     try {
-      const webhookUrl = 'https://ys286.zeabur.app/webhook/45984f7b-5b79-4bff-b17c-1f770060cb2c';
-      
-      const response = await fetch(webhookUrl, {
+      const response = await fetch('/api/submit', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          ...data,
-          submittedAt: new Date().toISOString(),
-        }),
+        body: JSON.stringify(data),
       });
 
-      if (response.ok || response.status === 200) {
+      if (response.ok) {
         localStorage.removeItem('estate-planning-form');
         router.push('/thank-you');
       } else {
