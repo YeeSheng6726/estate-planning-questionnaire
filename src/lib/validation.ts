@@ -144,7 +144,6 @@ export const formDataSchema = z.object({
   spouseInfo: spouseInfoSchema,
   parentsTestator: parentInfoSchema,
   parentsSpouse: parentInfoSchema,
-  numberOfChildren: z.string().optional(),
   beneficiaries: z.array(beneficiarySchema),
   financialDependent: financialDependentSchema,
   beneficiaryProtection: beneficiaryProtectionSchema,

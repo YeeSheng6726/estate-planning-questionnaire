@@ -128,7 +128,6 @@ export interface FormData {
   spouseInfo: SpouseInfo;
   parentsTestator: ParentInfo;
   parentsSpouse: ParentInfo;
-  numberOfChildren: number;
   beneficiaries: Beneficiary[];
   financialDependent: FinancialDependent;
   beneficiaryProtection: BeneficiaryProtection;

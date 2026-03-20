@@ -74,7 +74,6 @@ const defaultValues: FormData = {
     motherStatus: 'living',
     motherName: '',
   },
-  numberOfChildren: 0,
   beneficiaries: [],
   financialDependent: {
     hasDependents: '',
@@ -167,7 +166,6 @@ export function MultiStepForm() {
           reset({
             ...defaultValues,
             ...parsed,
-            numberOfChildren: parsed.numberOfChildren ?? 0,
             beneficiaries: Array.isArray(parsed.beneficiaries) ? parsed.beneficiaries : [],
           });
         }
