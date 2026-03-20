@@ -1,19 +1,18 @@
 'use client';
 
-import { UseFormRegister, FieldErrors, UseFormSetValue, UseFormWatch } from 'react-hook-form';
+import { UseFormRegister, UseFormSetValue, UseFormWatch } from 'react-hook-form';
 import { Textarea } from '@/components/ui/Textarea';
 import { Checkbox } from '@/components/ui/Checkbox';
 import { FormData } from '@/lib/types';
 
 interface Props {
   register: UseFormRegister<FormData>;
-  errors: FieldErrors<FormData>;
   setValue: UseFormSetValue<FormData>;
   watch: UseFormWatch<FormData>;
 }
 
 export function BusinessAssetsSection({ register, setValue, watch }: Props) {
-  const data = watch().businessAssets;
+  const data = watch('businessAssets');
 
   return (
     <div className="space-y-6">

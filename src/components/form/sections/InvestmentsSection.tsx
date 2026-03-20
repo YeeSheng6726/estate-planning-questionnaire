@@ -1,6 +1,6 @@
 'use client';
 
-import { UseFormRegister, FieldErrors, UseFormSetValue, UseFormWatch } from 'react-hook-form';
+import { UseFormRegister, FieldErrors, UseFormWatch } from 'react-hook-form';
 import { Input } from '@/components/ui/Input';
 import { Select } from '@/components/ui/Select';
 import { Textarea } from '@/components/ui/Textarea';
@@ -9,12 +9,11 @@ import { FormData } from '@/lib/types';
 interface Props {
   register: UseFormRegister<FormData>;
   errors: FieldErrors<FormData>;
-  setValue: UseFormSetValue<FormData>;
   watch: UseFormWatch<FormData>;
 }
 
 export function InvestmentsSection({ register, errors, watch }: Props) {
-  const investments = watch().investments;
+  const investments = watch('investments');
 
   const insuranceCompleted = investments?.insuranceNominationCompleted;
   const epfCompleted = investments?.epfNominationCompleted;

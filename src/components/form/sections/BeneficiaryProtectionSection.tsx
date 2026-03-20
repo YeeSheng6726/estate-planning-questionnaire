@@ -11,7 +11,7 @@ interface Props {
 }
 
 export function BeneficiaryProtectionSection({ register, watch }: Props) {
-  const data = watch().beneficiaryProtection;
+  const data = watch('beneficiaryProtection');
   const hasExclusions = data?.hasExclusions;
 
   return (

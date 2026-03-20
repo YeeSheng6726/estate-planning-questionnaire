@@ -1,6 +1,6 @@
 'use client';
 
-import { UseFormRegister, FieldErrors, UseFormSetValue, UseFormWatch } from 'react-hook-form';
+import { UseFormRegister, UseFormSetValue, UseFormWatch } from 'react-hook-form';
 import { Input } from '@/components/ui/Input';
 import { Checkbox } from '@/components/ui/Checkbox';
 import { Textarea } from '@/components/ui/Textarea';
@@ -8,13 +8,12 @@ import { FormData } from '@/lib/types';
 
 interface Props {
   register: UseFormRegister<FormData>;
-  errors: FieldErrors<FormData>;
   setValue: UseFormSetValue<FormData>;
   watch: UseFormWatch<FormData>;
 }
 
 export function SpecialConsiderationsSection({ register, setValue, watch }: Props) {
-  const data = watch().specialConsiderations;
+  const data = watch('specialConsiderations');
 
   return (
     <div className="space-y-6">

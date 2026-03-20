@@ -11,7 +11,7 @@ interface Props {
 }
 
 export function FinancialDependentSection({ register, watch }: Props) {
-  const data = watch().financialDependent;
+  const data = watch('financialDependent');
   const hasDependents = data?.hasDependents;
 
   return (

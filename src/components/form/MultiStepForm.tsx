@@ -247,9 +247,9 @@ export function MultiStepForm() {
       case 9:
         return <VehicleSection register={register} watch={watch} setValue={setValue} />;
       case 10:
-        return <InvestmentsSection register={register} errors={errors} watch={watch} setValue={setValue} />;
+        return <InvestmentsSection register={register} errors={errors} watch={watch} />;
       case 11:
-        return <BusinessAssetsSection register={register} errors={errors} watch={watch} setValue={setValue} />;
+        return <BusinessAssetsSection register={register} watch={watch} setValue={setValue} />;
       case 12:
         return (
           <div className="space-y-8">
@@ -274,7 +274,7 @@ export function MultiStepForm() {
           </div>
         );
       case 13:
-        return <SpecialConsiderationsSection register={register} errors={errors} watch={watch} setValue={setValue} />;
+        return <SpecialConsiderationsSection register={register} watch={watch} setValue={setValue} />;
       default:
         return null;
     }
