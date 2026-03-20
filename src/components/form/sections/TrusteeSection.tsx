@@ -45,15 +45,6 @@ export function TrusteeSection({ register, watch, title, titleCn, subtitle, pref
         <div className="border-t border-gray-200 pt-6 mt-6">
           <h4 className="font-medium text-[#1e3a5f] mb-4">{subtitle}</h4>
           
-          {trusteeData?.appointmentType === 'other' && (
-            <Input
-              label="Please provide details"
-              labelCn="若选择其他，请提供资料"
-              placeholder="e.g., Friend, relative, etc."
-              {...register(`${prefix}.otherDetails`)}
-            />
-          )}
-
           <div className="space-y-4">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <Input
