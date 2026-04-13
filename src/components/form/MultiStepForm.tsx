@@ -3,10 +3,12 @@
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { useForm } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ArrowLeft, ArrowRight, Send, Save, CheckCircle } from 'lucide-react';
 
 import { FormData } from '@/lib/types';
+import { formDataSchema } from '@/lib/validation';
 import { formSections, getSectionTitle } from './sections-config';
 import { ProgressBar } from './ProgressBar';
 import { Button } from '@/components/ui/Button';
@@ -78,7 +80,7 @@ const defaultValues: FormData = {
     motherStatus: '',
     motherName: '',
   },
-  noOfLegitimateChildren: 0,
+  noOfLegitimateChildren: '0',
   beneficiaries: [],
   financialDependent: {
     hasDependents: '',
@@ -192,6 +194,8 @@ export function MultiStepForm() {
     formState: { errors },
   } = useForm<FormData>({
     defaultValues,
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    resolver: zodResolver(formDataSchema) as any,
     mode: 'onBlur',
   });
 
@@ -356,7 +360,7 @@ export function MultiStepForm() {
           </div>
         );
       case 13:
-        return <SpecialConsiderationsSection register={register} watch={watch} setValue={setValue} />;
+        return <SpecialConsiderationsSection register={register} watch={watch} />;
       default:
         return null;
     }

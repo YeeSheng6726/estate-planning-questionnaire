@@ -61,10 +61,8 @@ export function RealEstateSection({ register, setValue, watch }: Props) {
   }, [properties, setValue]);
 
   const toggleAllNotApplicable = useCallback((checked: boolean) => {
-    if (checked) {
-      const updated = properties.map(p => ({ ...p, isNotApplicable: true }));
-      setValue('realEstate', updated);
-    }
+    const updated = properties.map(p => ({ ...p, isNotApplicable: checked }));
+    setValue('realEstate', updated);
   }, [properties, setValue]);
 
   const propertyTypes = [
@@ -212,15 +210,6 @@ export function RealEstateSection({ register, setValue, watch }: Props) {
         </Button>
       )}
 
-      {properties.length === 0 && (
-        <div className="text-center p-8 bg-gray-50 rounded-lg">
-          <p className="text-gray-500 mb-4">No properties added yet</p>
-          <Button type="button" variant="secondary" onClick={addProperty}>
-            <Plus size={16} className="mr-2" />
-            Add Your First Property
-          </Button>
-        </div>
-      )}
     </div>
   );
 }

@@ -2,7 +2,7 @@ import { z } from 'zod';
 
 export const personalInfoSchema = z.object({
   fullName: z.string().min(1),
-  gender: z.enum(['male', 'female', 'others']),
+  gender: z.enum(['male', 'female', 'others', '']),
   genderOther: z.string().optional(),
   dateOfBirth: z.string().min(1),
   religion: z.string().min(1),
@@ -22,7 +22,7 @@ export const personalInfoSchema = z.object({
 export const spouseInfoSchema = z.object({
   isApplicable: z.boolean(),
   fullName: z.string().optional(),
-  gender: z.enum(['male', 'female', 'others']).optional(),
+  gender: z.enum(['male', 'female', 'others', '']).optional(),
   genderOther: z.string().optional(),
   dateOfBirth: z.string().optional(),
   religion: z.string().optional(),
@@ -40,9 +40,9 @@ export const spouseInfoSchema = z.object({
 });
 
 export const parentInfoSchema = z.object({
-  fatherStatus: z.enum(['living', 'deceased', 'notApplicable']),
+  fatherStatus: z.enum(['living', 'deceased', 'notApplicable', '']),
   fatherName: z.string().optional(),
-  motherStatus: z.enum(['living', 'deceased', 'notApplicable']),
+  motherStatus: z.enum(['living', 'deceased', 'notApplicable', '']),
   motherName: z.string().optional(),
 });
 
@@ -71,7 +71,7 @@ export const realEstateSchema = z.object({
   isNotApplicable: z.boolean(),
   propertyType: z.string().optional(),
   propertyTypeOther: z.string().optional(),
-  ownership: z.enum(['sole', 'joint']).or(z.literal('')).optional(),
+  ownership: z.enum(['sole', 'joint', '']).optional(),
   ownershipOther: z.string().optional(),
   address: z.string().optional(),
   mainBeneficiaries: z.string().optional(),
@@ -122,7 +122,7 @@ export const businessAssetsSchema = z.object({
 });
 
 export const executorSchema = z.object({
-  appointmentType: z.enum(['spouse', 'adultChild', 'professional', 'other']),
+  appointmentType: z.enum(['spouse', 'adultChild', 'professional', 'other', '']),
   otherDetails: z.string().optional(),
   fullName: z.string().optional(),
   nric: z.string().optional(),
@@ -133,7 +133,7 @@ export const executorSchema = z.object({
 });
 
 export const trusteeSchema = z.object({
-  appointmentType: z.enum(['spouse', 'adultChild', 'professional', 'other']),
+  appointmentType: z.enum(['spouse', 'adultChild', 'professional', 'other', '']),
   otherDetails: z.string().optional(),
   fullName: z.string().optional(),
   nric: z.string().optional(),
@@ -144,7 +144,7 @@ export const trusteeSchema = z.object({
 });
 
 export const guardianSchema = z.object({
-  appointmentType: z.enum(['spouse', 'adultChild', 'professional', 'other']),
+  appointmentType: z.enum(['spouse', 'adultChild', 'professional', 'other', '']),
   otherDetails: z.string().optional(),
   fullName: z.string().optional(),
   nric: z.string().optional(),
@@ -170,7 +170,7 @@ export const formDataSchema = z.object({
   spouseInfo: spouseInfoSchema,
   parentsTestator: parentInfoSchema,
   parentsSpouse: parentInfoSchema,
-  noOfLegitimateChildren: z.number(),
+  noOfLegitimateChildren: z.string(),
   beneficiaries: z.array(beneficiarySchema),
   financialDependent: financialDependentSchema,
   beneficiaryProtection: beneficiaryProtectionSchema,

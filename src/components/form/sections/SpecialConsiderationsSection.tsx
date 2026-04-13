@@ -1,6 +1,6 @@
 'use client';
 
-import { UseFormRegister, UseFormSetValue, UseFormWatch } from 'react-hook-form';
+import { UseFormRegister, UseFormWatch } from 'react-hook-form';
 import { Input } from '@/components/ui/Input';
 import { RadioGroup } from '@/components/ui/RadioGroup';
 import { Textarea } from '@/components/ui/Textarea';
@@ -8,7 +8,6 @@ import { FormData } from '@/lib/types';
 
 interface Props {
   register: UseFormRegister<FormData>;
-  setValue: UseFormSetValue<FormData>;
   watch: UseFormWatch<FormData>;
 }
 

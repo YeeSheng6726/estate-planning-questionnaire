@@ -153,7 +153,7 @@ export interface FormData {
   spouseInfo: SpouseInfo;
   parentsTestator: ParentInfo;
   parentsSpouse: ParentInfo;
-  noOfLegitimateChildren: number;
+  noOfLegitimateChildren: string;
   beneficiaries: Beneficiary[];
   financialDependent: FinancialDependent;
   beneficiaryProtection: BeneficiaryProtection;

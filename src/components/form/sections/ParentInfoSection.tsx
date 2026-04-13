@@ -46,7 +46,7 @@ export function ParentInfoSection({ register, watch, title, titleCn, prefix }: P
               horizontal
               {...register(`${prefix}.fatherStatus`)}
             />
-            {fatherStatus !== 'deceased' && fatherStatus !== 'notApplicable' && (
+            {(fatherStatus === 'living' || fatherStatus === 'deceased') && (
               <Input
                 label="Full Name"
                 labelCn="姓名"
@@ -69,7 +69,7 @@ export function ParentInfoSection({ register, watch, title, titleCn, prefix }: P
               horizontal
               {...register(`${prefix}.motherStatus`)}
             />
-            {motherStatus !== 'deceased' && motherStatus !== 'notApplicable' && (
+            {(motherStatus === 'living' || motherStatus === 'deceased') && (
               <Input
                 label="Full Name"
                 labelCn="姓名"
