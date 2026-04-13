@@ -36,7 +36,7 @@ export function TrusteeSection({ register, watch, title, titleCn, subtitle, pref
         options={[
           { value: 'spouse', label: 'Spouse', labelCn: '配偶' },
           { value: 'adultChild', label: 'Adult Child', labelCn: '成年子女' },
-          { value: 'professional', label: 'Professional/Company', labelCn: '专业人士/公司' },
+          { value: 'professional', label: 'Professional Company', labelCn: '专业公司' },
           { value: 'other', label: 'Other', labelCn: '其他' },
         ]}
         {...register(`${prefix}.appointmentType`)}
