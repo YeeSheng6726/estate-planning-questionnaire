@@ -250,6 +250,41 @@ export function MultiStepForm() {
     }
   };
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const onError = (errors: Record<string, any>) => {
+    const errorStepMap: Record<string, number> = {
+      personalInfo: 0,
+      spouseInfo: 1,
+      parentsTestator: 2,
+      parentsSpouse: 3,
+      noOfLegitimateChildren: 4,
+      beneficiaries: 4,
+      financialDependent: 5,
+      beneficiaryProtection: 6,
+      realEstate: 7,
+      bankAccounts: 8,
+      vehicles: 9,
+      investments: 10,
+      businessAssets: 11,
+      executor: 12,
+      substituteExecutor: 12,
+      trustee: 12,
+      substituteTrustee: 12,
+      guardian: 12,
+      specialConsiderations: 13,
+    };
+
+    const firstErrorStep = Object.keys(errors)
+      .map(key => errorStepMap[key] ?? 0)
+      .sort((a, b) => a - b)[0];
+
+    if (firstErrorStep !== undefined) {
+      setCurrentStep(firstErrorStep);
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+    alert('Please fill in all required fields before submitting.');
+  };
+
   const nextStep = () => {
     if (currentStep < formSections.length - 1) {
       setCurrentStep(currentStep + 1);
@@ -421,7 +456,7 @@ export function MultiStepForm() {
                     </h2>
                   </div>
 
-                  <form onSubmit={handleSubmit(onSubmit)}>
+                  <form onSubmit={handleSubmit(onSubmit, onError)}>
                     {renderSection()}
 
                     <div className="flex justify-between items-center mt-8 pt-6 border-t border-gray-200">
