@@ -19,7 +19,9 @@ interface Props {
 
 export function ExecutorSection({ register, errors, watch, title, titleCn, subtitle, prefix }: Props) {
   const executorData = watch(prefix);
-  const showDetails = executorData?.appointmentType && executorData.appointmentType !== 'spouse';
+  const appointmentType = executorData?.appointmentType;
+  const showDetails = appointmentType && appointmentType !== 'spouse';
+  const isProfessional = appointmentType === 'professional';
 
   return (
     <div className="space-y-6">
@@ -45,64 +47,86 @@ export function ExecutorSection({ register, errors, watch, title, titleCn, subti
       {showDetails && (
         <div className="border-t border-gray-200 pt-6 mt-6">
           <h4 className="font-medium text-[#1e3a5f] mb-4">{subtitle}</h4>
-          
-          <div className="space-y-4">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+
+          {isProfessional ? (
+            <div className="space-y-4">
               <Input
-                label="Full Name as per NRIC"
-                labelCn="姓名"
-                placeholder="As per NRIC"
+                label="Estate Planning Company / Trustee Company Name"
+                labelCn="遗产规划公司/受托公司名称"
+                placeholder="Enter company name"
                 error={errors[prefix]?.fullName?.message}
                 {...register(`${prefix}.fullName`)}
               />
-
-              <Input
-                label="NRIC"
-                labelCn="身份证号码"
-                placeholder="e.g., 700101-01-1234"
-                error={errors[prefix]?.nric?.message}
-                {...register(`${prefix}.nric`)}
-              />
+              <div className="border-t border-gray-200 pt-6 mt-6">
+                <h4 className="font-medium text-[#1e3a5f] mb-4">Remarks / 备注</h4>
+                <Textarea
+                  label="Additional details not mentioned above"
+                  labelCn="上述未提及的其他详情"
+                  placeholder="Enter any additional details"
+                  rows={3}
+                  {...register(`${prefix}.remarks`)}
+                />
+              </div>
             </div>
+          ) : (
+            <div className="space-y-4">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <Input
+                  label="Full Name"
+                  labelCn="姓名"
+                  placeholder="As per NRIC"
+                  error={errors[prefix]?.fullName?.message}
+                  {...register(`${prefix}.fullName`)}
+                />
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <Input
+                  label="NRIC"
+                  labelCn="身份证号码"
+                  placeholder="e.g., 700101-01-1234"
+                  error={errors[prefix]?.nric?.message}
+                  {...register(`${prefix}.nric`)}
+                />
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <Input
+                  label="Relationship"
+                  labelCn="关系"
+                  placeholder="e.g., Spouse, Son, etc."
+                  error={errors[prefix]?.relationship?.message}
+                  {...register(`${prefix}.relationship`)}
+                />
+
+                <Input
+                  label="Mobile No."
+                  labelCn="电话号码"
+                  type="tel"
+                  placeholder="+60123456789"
+                  error={errors[prefix]?.mobileNo?.message}
+                  {...register(`${prefix}.mobileNo`)}
+                />
+              </div>
+
               <Input
-                label="Relationship"
-                labelCn="关系"
-                placeholder="e.g., Spouse, Son, etc."
-                error={errors[prefix]?.relationship?.message}
-                {...register(`${prefix}.relationship`)}
+                label="Residential Address"
+                labelCn="住宅地址"
+                placeholder="Complete residential address"
+                error={errors[prefix]?.address?.message}
+                {...register(`${prefix}.address`)}
               />
 
-              <Input
-                label="Mobile No."
-                labelCn="电话号码"
-                type="tel"
-                placeholder="+60123456789"
-                error={errors[prefix]?.mobileNo?.message}
-                {...register(`${prefix}.mobileNo`)}
-              />
+              <div className="border-t border-gray-200 pt-6 mt-6">
+                <h4 className="font-medium text-[#1e3a5f] mb-4">Remarks / 备注</h4>
+                <Textarea
+                  label="Additional details not mentioned above"
+                  labelCn="上述未提及的其他详情"
+                  placeholder="Enter any additional details"
+                  rows={3}
+                  {...register(`${prefix}.remarks`)}
+                />
+              </div>
             </div>
-
-            <Input
-              label="Residential Address"
-              labelCn="住宅地址"
-              placeholder="Complete residential address"
-              error={errors[prefix]?.address?.message}
-              {...register(`${prefix}.address`)}
-            />
-          </div>
-
-          <div className="border-t border-gray-200 pt-6 mt-6">
-            <h4 className="font-medium text-[#1e3a5f] mb-4">Remarks / 备注</h4>
-            <Textarea
-              label="Additional details not mentioned above"
-              labelCn="上述未提及的其他详情"
-              placeholder="Enter any additional details"
-              rows={3}
-              {...register(`${prefix}.remarks`)}
-            />
-          </div>
+          )}
         </div>
       )}
     </div>
