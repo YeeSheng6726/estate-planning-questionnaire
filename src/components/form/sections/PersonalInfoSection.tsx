@@ -19,13 +19,6 @@ export function PersonalInfoSection({ register, errors, watch }: Props) {
 
   return (
     <div className="space-y-6">
-      <div className="bg-gradient-to-r from-[#1e3a5f]/5 to-[#c9a962]/5 p-4 rounded-lg mb-6">
-        <p className="text-sm text-[#2d3748]">
-          <span className="font-semibold">Full Name as per NRIC</span>
-          <span className="text-[#c9a962] ml-2">姓名</span>
-        </p>
-      </div>
-
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         <Input
           label="Full Name"

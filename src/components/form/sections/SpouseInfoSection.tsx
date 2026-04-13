@@ -33,7 +33,9 @@ export function SpouseInfoSection({ register, watch, setValue }: Props) {
         <div className="bg-amber-50 border border-amber-200 p-4 rounded-lg mb-6">
           <p className="text-amber-800 text-sm">
             Note: This section is not applicable as you indicated you are not married.
-            <span className="text-amber-600 ml-2">注：如您未已婚，此部分不适用。</span>
+          </p>
+          <p className="text-amber-600 text-sm mt-1">
+            注：如您未已婚，此部分不适用。
           </p>
         </div>
       )}
