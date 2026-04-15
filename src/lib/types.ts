@@ -60,6 +60,7 @@ export interface RealEstate {
   mainBeneficiaries: string;
   substituteBeneficiaries: string;
   hasMortgageInsurance: boolean;
+  isMortgageFullySettled: boolean;
 }
 
 export interface BankAccount {

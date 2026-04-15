@@ -33,6 +33,7 @@ export function RealEstateSection({ register, setValue, watch }: Props) {
         mainBeneficiaries: '',
         substituteBeneficiaries: '',
         hasMortgageInsurance: false,
+        isMortgageFullySettled: false,
       };
       setValue('realEstate', [defaultProperty]);
     }
@@ -50,6 +51,7 @@ export function RealEstateSection({ register, setValue, watch }: Props) {
       mainBeneficiaries: '',
       substituteBeneficiaries: '',
       hasMortgageInsurance: false,
+      isMortgageFullySettled: false,
     };
     setValue('realEstate', [...properties, newProperty]);
   }, [properties, setValue]);
@@ -190,6 +192,13 @@ export function RealEstateSection({ register, setValue, watch }: Props) {
                     labelCn="已有房贷保险覆盖"
                     checked={property.hasMortgageInsurance}
                     onChange={(checked) => setValue(`realEstate.${index}.hasMortgageInsurance`, checked)}
+                  />
+
+                  <Checkbox
+                    label="Mortgage is fully settled"
+                    labelCn="房贷已全额还清"
+                    checked={property.isMortgageFullySettled}
+                    onChange={(checked) => setValue(`realEstate.${index}.isMortgageFullySettled`, checked)}
                   />
                 </>
               )}
