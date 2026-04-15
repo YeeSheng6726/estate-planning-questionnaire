@@ -101,8 +101,9 @@ const defaultValues: FormData = {
     prs: '',
     prsNominationCompleted: '',
     prsMainBeneficiary: '',
+    prsMainDistribution: '',
     prsSubBeneficiary: '',
-    prsDistribution: '',
+    prsSubDistribution: '',
     prsRemarks: '',
     insuranceNominationCompleted: '',
     insuranceRemarks: '',
@@ -179,6 +180,21 @@ const defaultValues: FormData = {
   },
 };
 
+const slideVariants = {
+  enter: (direction: number) => ({
+    x: direction > 0 ? 100 : -100,
+    opacity: 0,
+  }),
+  center: {
+    x: 0,
+    opacity: 1,
+  },
+  exit: (direction: number) => ({
+    x: direction < 0 ? 100 : -100,
+    opacity: 0,
+  }),
+};
+
 export function MultiStepForm() {
   const router = useRouter();
   const [currentStep, setCurrentStep] = useState(0);
@@ -189,6 +205,7 @@ export function MultiStepForm() {
     register,
     handleSubmit,
     watch,
+    getValues,
     setValue,
     reset,
     formState: { errors },
@@ -220,13 +237,13 @@ export function MultiStepForm() {
 
   useEffect(() => {
     const interval = setInterval(() => {
-      const data = watch();
+      const data = getValues();
       localStorage.setItem('estate-planning-form', JSON.stringify(data));
       setLastSaved(new Date());
     }, 30000);
 
     return () => clearInterval(interval);
-  }, [watch]);
+  }, [getValues]);
 
   const onSubmit = async (data: FormData) => {
     setIsSubmitting(true);
@@ -401,21 +418,6 @@ export function MultiStepForm() {
     }
   };
 
-  const slideVariants = {
-    enter: (direction: number) => ({
-      x: direction > 0 ? 100 : -100,
-      opacity: 0,
-    }),
-    center: {
-      x: 0,
-      opacity: 1,
-    },
-    exit: (direction: number) => ({
-      x: direction < 0 ? 100 : -100,
-      opacity: 0,
-    }),
-  };
-
   return (
     <div className="min-h-screen bg-[#faf9f6]">
       <div className="max-w-3xl mx-auto px-4 py-8">
@@ -440,6 +442,7 @@ export function MultiStepForm() {
           {(() => {
             const section = formSections[currentStep];
             return (
+              <div className="overflow-hidden">
               <AnimatePresence mode="wait" custom={currentStep}>
                 <motion.div
                   key={currentStep}
@@ -506,6 +509,7 @@ export function MultiStepForm() {
                   </form>
                 </motion.div>
               </AnimatePresence>
+              </div>
             );
           })()}
         </div>

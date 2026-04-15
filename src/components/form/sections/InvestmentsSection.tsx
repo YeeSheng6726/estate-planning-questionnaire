@@ -86,6 +86,12 @@ export function InvestmentsSection({ register, errors, watch }: Props) {
             {...register('investments.prsMainBeneficiary')}
           />
           <Input
+            label="Distribution"
+            labelCn="主要受益人分配额"
+            placeholder="e.g., 100% or John 50%, Mary 50%"
+            {...register('investments.prsMainDistribution')}
+          />
+          <Input
             label="Substitute Beneficiary"
             labelCn="替代受益人"
             placeholder="Name of substitute beneficiary"
@@ -93,9 +99,9 @@ export function InvestmentsSection({ register, errors, watch }: Props) {
           />
           <Input
             label="Distribution"
-            labelCn="分配额"
-            placeholder="e.g., John 50%, Mary 50%"
-            {...register('investments.prsDistribution')}
+            labelCn="替代受益人分配额"
+            placeholder="e.g., 100% or Peter 100%"
+            {...register('investments.prsSubDistribution')}
           />
           <Textarea
             label="Remarks"

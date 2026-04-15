@@ -87,8 +87,9 @@ export interface Investments {
   prs: string;
   prsNominationCompleted: string;
   prsMainBeneficiary: string;
+  prsMainDistribution: string;
   prsSubBeneficiary: string;
-  prsDistribution: string;
+  prsSubDistribution: string;
   prsRemarks: string;
   insuranceNominationCompleted: string;
   insuranceRemarks: string;
