@@ -122,7 +122,8 @@ function transformFormData(data: any, submissionId: string, submittedAt: string)
         "Address / 地址": r.address || '',
         "Main Beneficiaries + Distribution / 主要受益人 + 分配": r.mainBeneficiaries || '',
         "Substitute Beneficiaries / 代替受益人": r.substituteBeneficiaries || '',
-        "Has Mortgage Insurance / 已有房贷保险": r.hasMortgageInsurance ? 'Yes / 是' : 'No / 否'
+        "Has Mortgage Insurance / 已有房贷保险": r.hasMortgageInsurance ? 'Yes / 是' : 'No / 否',
+        "Mortgage Fully Settled / 房贷已全额还清": r.isMortgageFullySettled ? 'Yes / 是' : 'No / 否'
       }
     })) || [],
 
@@ -157,8 +158,9 @@ function transformFormData(data: any, submissionId: string, submittedAt: string)
       "PRS / 私人退休基金": data.investments?.prs || '',
       "PRS Nomination Completed / 私人退休基金指定受益人已完成": data.investments?.prsNominationCompleted || '',
       "All Investment - Main Beneficiary / 所有投资 - 主要受益人": data.investments?.prsMainBeneficiary || '',
+      "All Investment - Main Beneficiary Distribution / 所有投资 - 主要受益人分配额": data.investments?.prsMainDistribution || '',
       "All Investment - Substitute Beneficiary / 所有投资 - 代替受益人": data.investments?.prsSubBeneficiary || '',
-      "All Investment - Distribution / 所有投资 - 分配额": data.investments?.prsDistribution || '',
+      "All Investment - Substitute Beneficiary Distribution / 所有投资 - 代替受益人分配额": data.investments?.prsSubDistribution || '',
       "All Investment - Remarks / 所有投资 - 备注": data.investments?.prsRemarks || '',
       "Insurance Nomination Completed / 保险指定受益人已完成": data.investments?.insuranceNominationCompleted || '',
       "Insurance Remarks / 保险备注": data.investments?.insuranceRemarks || '',
