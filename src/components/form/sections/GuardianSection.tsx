@@ -1,6 +1,6 @@
 'use client';
 
-import { UseFormRegister, UseFormWatch } from 'react-hook-form';
+import { UseFormRegister, Control, useWatch } from 'react-hook-form';
 import { Input } from '@/components/ui/Input';
 import { RadioGroup } from '@/components/ui/RadioGroup';
 import { Textarea } from '@/components/ui/Textarea';
@@ -8,16 +8,15 @@ import { FormData } from '@/lib/types';
 
 interface Props {
   register: UseFormRegister<FormData>;
-  watch: UseFormWatch<FormData>;
+  control: Control<FormData>;
   title: string;
   titleCn: string;
   subtitle: string;
   prefix: 'guardian';
 }
 
-export function GuardianSection({ register, watch, title, titleCn, subtitle, prefix }: Props) {
-  const guardianData = watch(prefix);
-  const appointmentType = guardianData?.appointmentType;
+export function GuardianSection({ register, control, title, titleCn, subtitle, prefix }: Props) {
+  const appointmentType = useWatch({ control, name: `${prefix}.appointmentType` });
   const showDetails = appointmentType && appointmentType !== 'spouse';
   const isProfessional = appointmentType === 'professional';
 

@@ -70,7 +70,8 @@ function transformFormData(data: any, submissionId: string, submittedAt: string)
       "Spouse Mobile No. / 配偶电话": data.spouseInfo?.mobileNo || '',
       "Spouse Email / 配偶邮箱": data.spouseInfo?.email || '',
       "Spouse Date of Marriage / 配偶结婚日期": data.spouseInfo?.dateOfMarriage || '',
-      "Spouse Occupation / 配偶职业": data.spouseInfo?.occupation || ''
+      "Spouse Occupation / 配偶职业": data.spouseInfo?.occupation || '',
+      "Spouse Name of Employer / 配偶公司名字": data.spouseInfo?.employerName || ''
     },
 
     // Section 3 & 4: Parents / 父母信息
@@ -119,6 +120,7 @@ function transformFormData(data: any, submissionId: string, submittedAt: string)
         "Not Applicable / 不适用": r.isNotApplicable ? 'Yes / 是' : 'No / 否',
         "Property Type / 物业类型": r.propertyType || '',
         "Ownership / 拥有权": r.ownership === 'sole' ? 'Sole Name / 个人' : 'Joint Name / 联名',
+        "Joint Owner Name / 联名人姓名": r.ownershipOther || '',
         "Address / 地址": r.address || '',
         "Main Beneficiaries + Distribution / 主要受益人 + 分配": r.mainBeneficiaries || '',
         "Substitute Beneficiaries / 代替受益人": r.substituteBeneficiaries || '',

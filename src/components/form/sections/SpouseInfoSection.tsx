@@ -14,9 +14,9 @@ interface Props {
 }
 
 export function SpouseInfoSection({ register, watch, setValue }: Props) {
-  const spouseData = watch().spouseInfo;
-  const personalData = watch().personalInfo;
-  const isMarried = personalData?.maritalStatus === 'Married' || personalData?.maritalStatus === 'Contemplation';
+  const spouseData = watch('spouseInfo');
+  const maritalStatus = watch('personalInfo.maritalStatus');
+  const isMarried = maritalStatus === 'Married' || maritalStatus === 'Contemplation';
   const gender = spouseData?.gender;
   const religion = spouseData?.religion;
 

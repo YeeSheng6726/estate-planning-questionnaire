@@ -1,6 +1,6 @@
 'use client';
 
-import { UseFormRegister, FieldErrors, UseFormWatch } from 'react-hook-form';
+import { UseFormRegister, FieldErrors } from 'react-hook-form';
 import { Input } from '@/components/ui/Input';
 import { Select } from '@/components/ui/Select';
 import { Textarea } from '@/components/ui/Textarea';
@@ -9,11 +9,9 @@ import { FormData } from '@/lib/types';
 interface Props {
   register: UseFormRegister<FormData>;
   errors: FieldErrors<FormData>;
-  watch: UseFormWatch<FormData>;
 }
 
-export function InvestmentsSection({ register, errors, watch }: Props) {
-  const investments = watch('investments');
+export function InvestmentsSection({ register, errors }: Props) {
 
   return (
     <div className="space-y-6">

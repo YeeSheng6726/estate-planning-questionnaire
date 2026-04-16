@@ -1,6 +1,6 @@
 'use client';
 
-import { UseFormRegister, FieldErrors, UseFormSetValue, UseFormWatch } from 'react-hook-form';
+import { UseFormRegister, FieldErrors, UseFormSetValue, Control, useWatch } from 'react-hook-form';
 import { Input } from '@/components/ui/Input';
 import { RadioGroup } from '@/components/ui/RadioGroup';
 import { Textarea } from '@/components/ui/Textarea';
@@ -10,16 +10,15 @@ interface Props {
   register: UseFormRegister<FormData>;
   errors: FieldErrors<FormData>;
   setValue: UseFormSetValue<FormData>;
-  watch: UseFormWatch<FormData>;
+  control: Control<FormData>;
   title: string;
   titleCn: string;
   subtitle: string;
   prefix: 'executor' | 'substituteExecutor';
 }
 
-export function ExecutorSection({ register, errors, watch, title, titleCn, subtitle, prefix }: Props) {
-  const executorData = watch(prefix);
-  const appointmentType = executorData?.appointmentType;
+export function ExecutorSection({ register, errors, control, title, titleCn, subtitle, prefix }: Props) {
+  const appointmentType = useWatch({ control, name: `${prefix}.appointmentType` });
   const showDetails = appointmentType && appointmentType !== 'spouse';
   const isProfessional = appointmentType === 'professional';
 

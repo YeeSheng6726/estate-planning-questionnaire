@@ -3,8 +3,7 @@ import { Section } from '@/lib/types';
 export const formSections: Section[] = [
   { id: 1, title: 'Personal Information', titleCn: '个人信息', shortTitle: 'Personal Info' },
   { id: 2, title: 'Spouse Information', titleCn: '配偶信息', shortTitle: 'Spouse Info' },
-  { id: 3, title: "Testator's Parents", titleCn: '立遗嘱人父母', shortTitle: 'Parents' },
-  { id: 4, title: "Spouse's Parents", titleCn: '配偶父母', shortTitle: "Spouse's Parents" },
+  { id: 3, title: "Spouse's Parents", titleCn: '配偶父母', shortTitle: "Spouse's Parents" },
   { id: 5, title: 'Children & Beneficiaries', titleCn: '子女及受益人', shortTitle: 'Beneficiaries' },
   { id: 6, title: 'Financial Dependents', titleCn: '经济依赖者', shortTitle: 'Dependents' },
   { id: 7, title: 'Beneficiary Protection', titleCn: '受益人保护', shortTitle: 'Protection' },

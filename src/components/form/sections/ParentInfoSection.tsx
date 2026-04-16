@@ -14,9 +14,9 @@ interface Props {
 }
 
 export function ParentInfoSection({ register, watch, title, titleCn, prefix }: Props) {
-  const watchData = watch();
-  const fatherStatus = watchData[prefix]?.fatherStatus;
-  const motherStatus = watchData[prefix]?.motherStatus;
+  const watchData = watch(prefix);
+  const fatherStatus = watchData?.fatherStatus;
+  const motherStatus = watchData?.motherStatus;
 
   const statusOptions = [
     { value: 'living', label: 'Living', labelCn: '在世' },

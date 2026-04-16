@@ -206,6 +206,7 @@ export function MultiStepForm() {
     handleSubmit,
     watch,
     getValues,
+    control,
     setValue,
     reset,
     formState: { errors },
@@ -272,23 +273,22 @@ export function MultiStepForm() {
     const errorStepMap: Record<string, number> = {
       personalInfo: 0,
       spouseInfo: 1,
-      parentsTestator: 2,
-      parentsSpouse: 3,
-      noOfLegitimateChildren: 4,
-      beneficiaries: 4,
-      financialDependent: 5,
-      beneficiaryProtection: 6,
-      realEstate: 7,
-      bankAccounts: 8,
-      vehicles: 9,
-      investments: 10,
-      businessAssets: 11,
-      executor: 12,
-      substituteExecutor: 12,
-      trustee: 12,
-      substituteTrustee: 12,
-      guardian: 12,
-      specialConsiderations: 13,
+      parentsSpouse: 2,
+      noOfLegitimateChildren: 3,
+      beneficiaries: 3,
+      financialDependent: 4,
+      beneficiaryProtection: 5,
+      realEstate: 6,
+      bankAccounts: 7,
+      vehicles: 8,
+      investments: 9,
+      businessAssets: 10,
+      executor: 11,
+      substituteExecutor: 11,
+      trustee: 11,
+      substituteTrustee: 11,
+      guardian: 11,
+      specialConsiderations: 12,
     };
 
     const firstErrorStep = Object.keys(errors)
@@ -323,32 +323,30 @@ export function MultiStepForm() {
       case 1:
         return <SpouseInfoSection register={register} watch={watch} setValue={setValue} />;
       case 2:
-        return <ParentInfoSection register={register} watch={watch} title="Testator's Parents" titleCn="立遗嘱人的父母" prefix="parentsTestator" />;
-      case 3:
         return <ParentInfoSection register={register} watch={watch} title="Spouse's Parents" titleCn="配偶的父母" prefix="parentsSpouse" />;
-      case 4:
+      case 3:
         return <BeneficiarySection register={register} watch={watch} setValue={setValue} />;
-      case 5:
+      case 4:
         return <FinancialDependentSection register={register} watch={watch} />;
-      case 6:
+      case 5:
         return <BeneficiaryProtectionSection register={register} watch={watch} />;
-      case 7:
+      case 6:
         return <RealEstateSection register={register} watch={watch} setValue={setValue} />;
-      case 8:
+      case 7:
         return <BankAccountSection register={register} watch={watch} setValue={setValue} />;
-      case 9:
+      case 8:
         return <VehicleSection register={register} watch={watch} setValue={setValue} />;
+      case 9:
+        return <InvestmentsSection register={register} errors={errors} />;
       case 10:
-        return <InvestmentsSection register={register} errors={errors} watch={watch} />;
-      case 11:
         return <BusinessAssetsSection register={register} watch={watch} />;
-      case 12:
+      case 11:
         return (
           <div className="space-y-8">
             <ExecutorSection
               register={register}
               errors={errors}
-              watch={watch}
+              control={control}
               setValue={setValue}
               title="Primary Executor"
               titleCn="主要遗嘱执行人"
@@ -358,7 +356,7 @@ export function MultiStepForm() {
             <ExecutorSection
               register={register}
               errors={errors}
-              watch={watch}
+              control={control}
               setValue={setValue}
               title="Substitute Executor"
               titleCn="替代遗嘱执行人"
@@ -375,7 +373,7 @@ export function MultiStepForm() {
               </div>
               <TrusteeSection
                 register={register}
-                watch={watch}
+                control={control}
                 title="Primary Trustee"
                 titleCn="主要受托人"
                 subtitle="Trustee Details / 受托人详情"
@@ -384,7 +382,7 @@ export function MultiStepForm() {
               <div className="mt-6">
                 <TrusteeSection
                   register={register}
-                  watch={watch}
+                  control={control}
                   title="Substitute Trustee"
                   titleCn="替代受托人"
                   subtitle="Substitute Trustee Details / 替代受托人详情"
@@ -401,7 +399,7 @@ export function MultiStepForm() {
                 </div>
                 <GuardianSection
                   register={register}
-                  watch={watch}
+                  control={control}
                   title="Guardian"
                   titleCn="监护人"
                   subtitle="Guardian Details / 监护人详情"
@@ -411,7 +409,7 @@ export function MultiStepForm() {
             </div>
           </div>
         );
-      case 13:
+      case 12:
         return <SpecialConsiderationsSection register={register} watch={watch} />;
       default:
         return null;
